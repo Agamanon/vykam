@@ -35,6 +35,7 @@ interface Producto {
 interface Compra {
   id: string
   precio_pagado: number
+  precio_unitario: number
   estado: string
   created_at: string
   productos: { titulo: string } | null
@@ -387,7 +388,7 @@ export default function DashboardPage() {
                 <div className="dash-card-header"><h3>Últimas ofertas de compra</h3><button className="dash-link" onClick={() => setSeccion('compras')}>Ver todas</button></div>
                 {misCompras.length === 0 ? <p className="dash-empty">Aún no has publicado ofertas de compra.</p> : (
                   <table className="dash-table"><thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Valor total</th><th>Estado</th><th>Fecha</th></tr></thead>
-                    <tbody>{misCompras.slice(0, 5).map(c => (<tr key={c.id}><td>{nombreProducto(c.productos?.titulo ?? '')}</td><td>{c.cantidad ?? '—'}</td><td>{formatPrecio((c as Record<string, unknown>).precio_unitario as number ?? 0)}</td><td>{formatPrecio(c.precio_pagado)}</td><td><span className="dash-estado activo-compra">{c.estado}</span></td><td>{formatFecha(c.created_at)}</td></tr>))}</tbody>
+                    <tbody>{misCompras.slice(0, 5).map(c => (<tr key={c.id}><td>{nombreProducto(c.productos?.titulo ?? '')}</td><td>{c.cantidad ?? '—'}</td><td>{formatPrecio(c.precio_unitario ?? 0)}</td><td>{formatPrecio(c.precio_pagado)}</td><td><span className="dash-estado activo-compra">{c.estado}</span></td><td>{formatFecha(c.created_at)}</td></tr>))}</tbody>
                   </table>
                 )}
               </div>
@@ -417,7 +418,7 @@ export default function DashboardPage() {
               <div className="dash-card">
                 {misCompras.length === 0 ? <p className="dash-empty">Aún no has publicado ofertas de compra.</p> : (
                   <table className="dash-table"><thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Valor total</th><th>Estado</th><th>Fecha</th></tr></thead>
-                    <tbody>{misCompras.map(c => (<tr key={c.id}><td>{nombreProducto(c.productos?.titulo ?? '')}</td><td>{c.cantidad ?? '—'}</td><td>{formatPrecio((c as Record<string, unknown>).precio_unitario as number ?? 0)}</td><td>{formatPrecio(c.precio_pagado)}</td><td><span className="dash-estado activo-compra">{c.estado}</span></td><td>{formatFecha(c.created_at)}</td></tr>))}</tbody>
+                    <tbody>{misCompras.map(c => (<tr key={c.id}><td>{nombreProducto(c.productos?.titulo ?? '')}</td><td>{c.cantidad ?? '—'}</td><td>{formatPrecio(c.precio_unitario ?? 0)}</td><td>{formatPrecio(c.precio_pagado)}</td><td><span className="dash-estado activo-compra">{c.estado}</span></td><td>{formatFecha(c.created_at)}</td></tr>))}</tbody>
                   </table>
                 )}
               </div>
