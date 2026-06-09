@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" width="400" height="140">
+  <defs>
+    <!-- Gradiente principal azul -->
+    <linearGradient id="gradPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradiente para el texto -->
+    <linearGradient id="gradText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradiente claro para el interior -->
+    <linearGradient id="gradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Sombra suave -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Icono: Cuadrado con letra V estilizada -->
+  <g filter="url(#shadow)">
+    <!-- Fondo del icono con esquinas redondeadas -->
+    <rect x="20" y="30" width="80" height="80" rx="18" ry="18" fill="url(#gradPrimary)"/>
+
+    <!-- Forma interna decorativa (esquina) -->
+    <path d="M 20 48 Q 20 30 38 30 L 60 30 L 20 70 Z" fill="url(#gradLight)" opacity="0.15"/>
+
+    <!-- Letra V estilizada -->
+    <path d="M 38 48 L 60 92 L 82 48"
+          stroke="white"
+          stroke-width="8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"/>
+
+    <!-- Punto decorativo -->
+    <circle cx="60" cy="92" r="4" fill="white"/>
+  </g>
+
+  <!-- Texto "Vykam" -->
+  <text x="118" y="82"
+        font-family="'Poppins', 'Segoe UI', Arial, sans-serif"
+        font-size="48"
+        font-weight="800"
+        fill="url(#gradText)"
+        letter-spacing="-1.5">Vykam</text>
+
+  <!-- Tagline debajo -->
+  <text x="120" y="105"
+        font-family="'Poppins', 'Segoe UI', Arial, sans-serif"
+        font-size="11"
+        font-weight="500"
+        fill="#64748b"
+        letter-spacing="3">COMPRAR  ·  VENDER</text>
+</svg>
