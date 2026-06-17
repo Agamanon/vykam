@@ -1,152 +1,187 @@
-// src/app/perfil/[nombre]/page.tsx
-// Página de perfil público — solo lectura
+'use client'
 
-import { createClient } from '@supabase/supabase-js'
-import { notFound } from 'next/navigation'
+import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
+import supabase from '@/lib/supabase'
+import { normalizarSlug } from '@/lib/utils'
+import { getProductoBySlug } from '@/lib/productos'
 
-const supabaseServer = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+interface Perfil {
+  id: string
+  nombre_completo: string | null
+  avatar_url: string | null
+  rol: 'usuario' | 'admin'
+  created_at: string
+  email: string | null
+  telefono: string | null
+  nombre_empresa: string | null
+  direccion: string | null
+  horario: string | null
+}
+
+interface OfertaResumen {
+  id: string
+  producto_slug: string
+  cantidad: number
+  precio: number
+  total: number
+}
 
 interface Props {
   params: Promise<{ nombre: string }>
 }
 
-function slugToNombre(slug: string) {
-  return decodeURIComponent(slug).replace(/-/g, ' ')
-}
+export default function PerfilPage({ params }: Props) {
+  const { nombre: slugParam } = use(params)
 
-export default async function PerfilPublicoPage({ params }: Props) {
-  const { nombre } = await params
-  const nombreBuscado = slugToNombre(nombre)
+  const [perfil, setPerfil] = useState<Perfil | null>(null)
+  const [ofertasVenta, setOfertasVenta] = useState<OfertaResumen[]>([])
+  const [ofertasCompra, setOfertasCompra] = useState<OfertaResumen[]>([])
+  const [cargando, setCargando] = useState(true)
+  const [noEncontrado, setNoEncontrado] = useState(false)
 
-  // Buscar perfil por nombre_completo (case-insensitive)
-  // Fetch all perfiles and find by normalized name
-  const { data: perfiles } = await supabaseServer
-    .from('perfiles')
-    .select('id, nombre_completo, avatar_url, email, telefono, nombre_empresa, direccion_empresa, horario_atencion, created_at')
+  useEffect(() => {
+    async function cargar() {
+      const { data: perfiles } = await supabase
+        .from('perfiles')
+        .select('*')
 
-  const normalize = (s: string) =>
-    s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, '-')
+      const encontrado = (perfiles ?? []).find(
+        (p: Perfil) => p.nombre_completo && normalizarSlug(p.nombre_completo) === slugParam
+      )
 
-  const perfil = (perfiles ?? []).find(p => normalize(p.nombre_completo ?? '') === normalize(nombre))
+      if (!encontrado) {
+        setNoEncontrado(true)
+        setCargando(false)
+        return
+      }
 
-console.log('nombre del param:', nombre)
-console.log('perfiles encontrados:', perfiles?.map(p => ({ nombre: p.nombre_completo, normalizado: normalize(p.nombre_completo ?? '') })))
-console.log('perfil encontrado:', perfil)
+      setPerfil(encontrado)
 
-  if (!perfil) notFound()
+      const [{ data: ventas }, { data: compras }] = await Promise.all([
+        supabase
+          .from('ofertas_venta')
+          .select('id, producto_slug, cantidad, precio, total')
+          .eq('vendedor_id', encontrado.id)
+          .order('created_at', { ascending: false }),
+        supabase
+          .from('ofertas_compra')
+          .select('id, producto_slug, cantidad, precio, total')
+          .eq('comprador_id', encontrado.id)
+          .order('created_at', { ascending: false }),
+      ])
 
-  function iniciales(nombre: string | null) {
-    if (!nombre) return '?'
-    return nombre.split(' ').map((p: string) => p[0]).slice(0, 2).join('').toUpperCase()
+      setOfertasVenta(ventas ?? [])
+      setOfertasCompra(compras ?? [])
+      setCargando(false)
+    }
+
+    cargar()
+  }, [slugParam])
+
+  const iniciales =
+    perfil?.nombre_completo
+      ?.split(' ')
+      .map(n => n[0])
+      .slice(0, 2)
+      .join('')
+      .toUpperCase() ?? '?'
+
+  const fechaMiembro = perfil?.created_at
+    ? new Date(perfil.created_at).toLocaleDateString('es-PE', {
+        year: 'numeric',
+        month: 'long',
+      })
+    : ''
+
+  if (cargando) {
+    return (
+      <div className="perfil-feedback">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </div>
+        <p>Cargando perfil...</p>
+      </div>
+    )
   }
 
-  function formatFecha(iso: string) {
-    return new Date(iso).toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' })
+  if (noEncontrado) {
+    return (
+      <div className="perfil-feedback">
+        <i className="bi bi-person-x perfil-feedback-icon"></i>
+        <h2>Perfil no encontrado</h2>
+        <p>El usuario que buscas no existe o cambió su nombre.</p>
+        <Link href="/" className="btn-product" style={{ display: 'inline-flex', width: 'auto' }}>
+          <span>Volver al inicio</span>
+          <i className="bi bi-house-fill"></i>
+        </Link>
+      </div>
+    )
   }
 
   return (
-    <>
-      {/* Miga de pan */}
-      <section className="breadcrumb-section">
-        <div className="container">
-          <div className="breadcrumb-custom">
-            <Link href="/"><i className="bi bi-house-fill"></i> Inicio</Link>
-            <i className="bi bi-chevron-right" style={{ fontSize: '0.7rem' }}></i>
-            <span>Perfil de {perfil.nombre_completo}</span>
+    <div className="perfil-page-bg">
+      <div className="perfil-card">
+
+        {/* ── Cabecera azul ── */}
+        <div className="perfil-card-header">
+          <div className="perfil-avatar">
+            {perfil?.avatar_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={perfil.avatar_url} alt={perfil.nombre_completo ?? ''} className="perfil-avatar-img" />
+            ) : (
+              <span className="perfil-avatar-iniciales">{iniciales}</span>
+            )}
+          </div>
+          <h1 className="perfil-nombre">{perfil?.nombre_completo}</h1>
+          <div className="perfil-header-row">
+            <i className="bi bi-building"></i>
+            <span>{perfil?.nombre_empresa}</span>
+          </div>
+          <div className="perfil-header-row">
+            <i className="bi bi-calendar3"></i>
+            <span>Miembro desde {fechaMiembro}</span>
           </div>
         </div>
-      </section>
 
-      {/* Card de perfil */}
-      <section style={{ padding: '3rem 0', minHeight: '60vh', background: 'var(--light)' }}>
-        <div className="container">
-          <div style={{ maxWidth: 560, margin: '0 auto', background: '#fff', borderRadius: 16, boxShadow: '0 4px 24px rgba(0,0,0,0.08)', overflow: 'hidden' }}>
-
-            {/* Header con avatar */}
-            <div style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #3730a3) 100%)', padding: '2rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-              {perfil.avatar_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={perfil.avatar_url} alt={perfil.nombre_completo ?? ''} style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover', border: '3px solid rgba(255,255,255,0.5)' }} />
-              ) : (
-                <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', fontWeight: 700, color: '#fff', border: '3px solid rgba(255,255,255,0.5)' }}>
-                  {iniciales(perfil.nombre_completo)}
-                </div>
-              )}
-              <div>
-                <h1 style={{ color: '#fff', margin: 0, fontSize: '1.4rem', fontWeight: 700 }}>{perfil.nombre_completo}</h1>
-                {perfil.nombre_empresa && (
-                  <p style={{ color: 'rgba(255,255,255,0.85)', margin: '0.25rem 0 0', fontSize: '0.95rem' }}>
-                    <i className="bi bi-building me-1"></i>{perfil.nombre_empresa}
-                  </p>
-                )}
-                <p style={{ color: 'rgba(255,255,255,0.7)', margin: '0.25rem 0 0', fontSize: '0.8rem' }}>
-                  Miembro desde {formatFecha(perfil.created_at)}
-                </p>
-              </div>
-            </div>
-
-            {/* Información de contacto */}
-            <div style={{ padding: '1.5rem' }}>
-
-              {(perfil.email || perfil.telefono) && (
-                <>
-                  <p style={{ fontWeight: 600, fontSize: '0.75rem', color: 'var(--gray)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 0.75rem' }}>
-                    Información personal
-                  </p>
-                  {perfil.email && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: '1px solid #f3f4f6' }}>
-                      <i className="bi bi-envelope-fill" style={{ color: 'var(--primary)', width: 20 }}></i>
-                      <span style={{ color: '#374151' }}>{perfil.email}</span>
-                    </div>
-                  )}
-                  {perfil.telefono && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: '1px solid #f3f4f6' }}>
-                      <i className="bi bi-telephone-fill" style={{ color: 'var(--primary)', width: 20 }}></i>
-                      <span style={{ color: '#374151' }}>{perfil.telefono}</span>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {(perfil.nombre_empresa || perfil.direccion_empresa || perfil.horario_atencion) && (
-                <>
-                  <p style={{ fontWeight: 600, fontSize: '0.75rem', color: 'var(--gray)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '1.25rem 0 0.75rem' }}>
-                    Información de empresa
-                  </p>
-                  {perfil.nombre_empresa && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: '1px solid #f3f4f6' }}>
-                      <i className="bi bi-building" style={{ color: 'var(--primary)', width: 20 }}></i>
-                      <span style={{ color: '#374151' }}>{perfil.nombre_empresa}</span>
-                    </div>
-                  )}
-                  {perfil.direccion_empresa && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: '1px solid #f3f4f6' }}>
-                      <i className="bi bi-geo-alt-fill" style={{ color: 'var(--primary)', width: 20 }}></i>
-                      <span style={{ color: '#374151' }}>{perfil.direccion_empresa}</span>
-                    </div>
-                  )}
-                  {perfil.horario_atencion && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: '1px solid #f3f4f6' }}>
-                      <i className="bi bi-clock-fill" style={{ color: 'var(--primary)', width: 20 }}></i>
-                      <span style={{ color: '#374151' }}>{perfil.horario_atencion}</span>
-                    </div>
-                  )}
-                </>
-              )}
-
-              <div style={{ marginTop: '1.5rem' }}>
-                <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
-                  <i className="bi bi-arrow-left"></i> Volver al sitio
-                </Link>
-              </div>
-            </div>
+        {/* ── Información personal ── */}
+        <div className="perfil-info-section">
+          <div className="perfil-section-label">INFORMACIÓN PERSONAL</div>
+          <div className="perfil-info-row">
+            <i className="bi bi-envelope"></i>
+            <span>{perfil?.email}</span>
+          </div>
+          <div className="perfil-info-row">
+            <i className="bi bi-telephone"></i>
+            <span>{perfil?.telefono}</span>
           </div>
         </div>
-      </section>
-    </>
+
+        {/* ── Información de empresa ── */}
+        <div className="perfil-info-section">
+          <div className="perfil-section-label">INFORMACIÓN DE EMPRESA</div>
+          <div className="perfil-info-row">
+            <i className="bi bi-building"></i>
+            <span>{perfil?.nombre_empresa}</span>
+          </div>
+          <div className="perfil-info-row">
+            <i className="bi bi-geo-alt"></i>
+            <span>{perfil?.direccion}</span>
+          </div>
+          <div className="perfil-info-row">
+            <i className="bi bi-clock"></i>
+            <span>{perfil?.horario}</span>
+          </div>
+        </div>
+
+        {/* ── Volver ── */}
+        <div className="perfil-back">
+          <Link href="/" className="perfil-back-link">
+            ← Volver al sitio
+          </Link>
+        </div>
+
+      </div>
+    </div>
   )
 }

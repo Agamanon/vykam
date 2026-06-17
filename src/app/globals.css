@@ -1579,32 +1579,18 @@ footer p {
 }
 
 /* ===== LOGIN PAGE ===== */
-.top-bar {
-  padding: 1.5rem 2rem;
-  position: relative;
-  z-index: 2;
-  order: 3;
-}
-
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: white;
+  color: var(--primary);
   text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .back-link:hover {
-  background: rgba(255, 255, 255, 0.25);
-  color: white;
+  color: var(--primary-dark);
   transform: translateX(-3px);
 }
 
@@ -1616,7 +1602,6 @@ footer p {
   padding: 1rem 1.5rem 3rem;
   position: relative;
   z-index: 1;
-  order: 1;
 }
 
 .login-card {
@@ -1908,13 +1893,11 @@ footer p {
 
 .trust-badge {
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
+  margin-top: 2rem;
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.85rem;
   position: relative;
   z-index: 1;
-  order: 2;
 }
 
 .trust-badge i {
@@ -1932,10 +1915,7 @@ footer p {
   .login-logo {
     height: 65px;
   }
-  .top-bar {
-    padding: 1rem;
-  }
-  .form-options {
+.form-options {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -2147,6 +2127,95 @@ footer p {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+/* ── Sección Mi Perfil ── */
+.dash-perfil-card {
+  max-width: 540px;
+}
+
+.dash-perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.dash-perfil-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.dash-perfil-avatar-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  font-weight: 700;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dash-perfil-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dash-cambiar-foto {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  transition: background 0.2s ease;
+}
+
+.dash-cambiar-foto:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.dash-perfil-nombre {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 0.15rem;
+  color: var(--dark);
+}
+
+.dash-perfil-rol {
+  color: var(--gray);
+  margin: 0 0 0.1rem;
+  font-size: 0.9rem;
+}
+
+.dash-perfil-fecha {
+  color: var(--gray);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.dash-perfil-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 1rem;
 }
 
 .dash-badge-admin {
@@ -2448,73 +2517,183 @@ footer p {
   color: #1e40af;
 }
 
-/* ===== LOGIN RESPONSIVO ===== */
-@media (max-width: 600px) {
-  .login-wrapper {
-    padding: 0.5rem 1rem 2rem;
-    align-items: flex-start;
-  }
-
-  .login-card {
-    padding: 1.5rem 1.25rem;
-    border-radius: 16px;
-    max-width: 100%;
-  }
-
-  .login-title {
-    font-size: 1.35rem;
-  }
-
-  .login-subtitle {
-    font-size: 0.85rem;
-  }
-
-  .login-logo {
-    height: 60px;
-  }
-
-  .form-input {
-    font-size: 0.9rem;
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
-  }
-
-  .btn-login {
-    padding: 0.8rem;
-    font-size: 0.95rem;
-  }
-
-  .btn-google {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-  }
-
-  .form-options {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .trust-badge {
-    font-size: 0.8rem;
-    padding: 0 1rem 1rem;
-  }
+/* ===== LINKS DE PERFIL EN TABLA DE OFERTAS ===== */
+.oferta-perfil-link {
+  color: inherit;
+  text-decoration: none;
 }
 
-@media (max-width: 360px) {
-  .login-card {
-    padding: 1.25rem 1rem;
+.oferta-perfil-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ===== PÁGINA DE PERFIL PÚBLICO ===== */
+.perfil-page-bg {
+  min-height: calc(100vh - 80px);
+  background: var(--light);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.perfil-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.perfil-card-header {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  padding: 2.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.perfil-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.perfil-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-avatar-iniciales {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.perfil-nombre {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.perfil-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+}
+
+.perfil-header-row i {
+  font-size: 0.875rem;
+}
+
+.perfil-info-section {
+  padding: 1.25rem 2rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.perfil-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.perfil-info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  color: var(--dark);
+  font-size: 0.9rem;
+}
+
+.perfil-info-row:not(:last-child) {
+  border-bottom: 1px solid #f8fafc;
+}
+
+.perfil-info-row i {
+  color: var(--primary);
+  font-size: 1rem;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.perfil-back {
+  padding: 1.25rem 2rem 1.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.perfil-back-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.perfil-back-link:hover {
+  text-decoration: underline;
+}
+
+.perfil-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 50vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.perfil-feedback-icon {
+  font-size: 3.5rem;
+  color: var(--gray);
+  opacity: 0.5;
+}
+
+.perfil-feedback h2 {
+  font-weight: 700;
+  margin: 0;
+}
+
+.perfil-feedback p {
+  color: var(--gray);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .perfil-page-bg {
+    padding: 1.5rem 1rem;
   }
 
-  .login-title {
-    font-size: 1.2rem;
+  .perfil-avatar {
+    width: 70px;
+    height: 70px;
   }
 
-  .top-bar {
-    padding: 0.75rem;
+  .perfil-avatar-iniciales {
+    font-size: 1.5rem;
   }
 
-  .back-link {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.75rem;
+  .perfil-nombre {
+    font-size: 1.25rem;
   }
 }
