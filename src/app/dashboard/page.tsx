@@ -35,6 +35,7 @@ interface Producto {
 interface Compra {
   id: string
   precio_pagado: number
+  precio_unitario: number
   estado: string
   created_at: string
   productos: { titulo: string } | null
@@ -430,7 +431,7 @@ export default function DashboardPage() {
                         <tr key={c.id}>
                           <td>{nombreProducto(c.productos?.titulo ?? '')}</td>
                           <td>{c.cantidad ?? '—'}</td>
-                          <td>{formatPrecio((c as Record<string, unknown>).precio_unitario as number ?? 0)}</td>
+                          <td>{formatPrecio(c.precio_unitario ?? 0)}</td>
                           <td>{formatPrecio(c.precio_pagado)}</td>
                           <td><span className="dash-estado activo-compra">{c.estado}</span></td>
                           <td>{formatFecha(c.created_at)}</td>
@@ -514,7 +515,7 @@ export default function DashboardPage() {
                         <tr key={c.id}>
                           <td>{nombreProducto(c.productos?.titulo ?? '')}</td>
                           <td>{c.cantidad ?? '—'}</td>
-                          <td>{formatPrecio((c as Record<string, unknown>).precio_unitario as number ?? 0)}</td>
+                          <td>{formatPrecio(c.precio_unitario ?? 0)}</td>
                           <td>{formatPrecio(c.precio_pagado)}</td>
                           <td><span className="dash-estado activo-compra">{c.estado}</span></td>
                           <td>{formatFecha(c.created_at)}</td>
