@@ -14,6 +14,7 @@ type Props =
       tipo: 'venta'
       ofertas: OfertaVenta[]
       duplicadoId: string | null
+      usuarioId: string | null
       onEliminar: (id: string) => Promise<void>
       onEjecutarDirecto: (idVenta: string, comprador: string, cantidad: number) => Promise<boolean>
     }
@@ -21,6 +22,7 @@ type Props =
       tipo: 'compra'
       ofertas: OfertaCompra[]
       duplicadoId: string | null
+      usuarioId: string | null
       onEliminar: (id: string) => Promise<void>
       onEjecutarDirecto: (idCompra: string, vendedor: string, cantidad: number) => Promise<boolean>
     }
