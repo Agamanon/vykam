@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import supabase from '@/lib/supabase'
@@ -93,7 +93,9 @@ export default function DashboardPage() {
   const [direccionEdit, setDireccionEdit] = useState('')
   const [horarioEdit, setHorarioEdit] = useState('')
   const [guardandoPerfil, setGuardandoPerfil] = useState(false)
+  const [subiendoFoto, setSubiendoFoto] = useState(false)
   const [alertaPerfil, setAlertaPerfil] = useState<{ tipo: 'error' | 'success'; texto: string } | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   // ── Carga inicial ──────────────────────────────────────────────
   useEffect(() => {
@@ -221,6 +223,36 @@ export default function DashboardPage() {
     router.push('/login')
   }
 
+  async function handleCambiarFoto(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setSubiendoFoto(true)
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) { setSubiendoFoto(false); return }
+    const ruta = `${user.id}/avatar`
+    const { error: uploadError } = await supabase.storage
+      .from('avatares')
+      .upload(ruta, file, { upsert: true })
+    if (uploadError) {
+      setAlertaPerfil({ tipo: 'error', texto: 'Error al subir la imagen. Intenta de nuevo.' })
+      setSubiendoFoto(false)
+      return
+    }
+    const { data: { publicUrl } } = supabase.storage.from('avatares').getPublicUrl(ruta)
+    const urlConCache = `${publicUrl}?t=${Date.now()}`
+    const { error: updateError } = await supabase
+      .from('perfiles')
+      .update({ avatar_url: urlConCache })
+      .eq('id', user.id)
+    if (updateError) {
+      setAlertaPerfil({ tipo: 'error', texto: 'Error al guardar la foto. Intenta de nuevo.' })
+    } else {
+      setPerfil(prev => prev ? { ...prev, avatar_url: urlConCache } : prev)
+    }
+    setSubiendoFoto(false)
+    e.target.value = ''
+  }
+
   async function guardarPerfil(e: React.FormEvent) {
     e.preventDefault()
     setGuardandoPerfil(true)
@@ -308,14 +340,14 @@ export default function DashboardPage() {
           <button className={`dash-nav-item ${seccion === 'resumen' ? 'active' : ''}`} onClick={() => { setSeccion('resumen'); setMenuAbierto(false) }}>
             <i className="bi bi-grid-fill" /> Resumen
           </button>
+          <button className={`dash-nav-item ${seccion === 'perfil' ? 'active' : ''}`} onClick={() => { setSeccion('perfil'); setMenuAbierto(false) }}>
+            <i className="bi bi-person-fill" /> Mi perfil
+          </button>
           <button className={`dash-nav-item ${seccion === 'compras' ? 'active' : ''}`} onClick={() => { setSeccion('compras'); setMenuAbierto(false) }}>
             <i className="bi bi-cart-fill" /> Mis ofertas de compra
           </button>
           <button className={`dash-nav-item ${seccion === 'ventas' ? 'active' : ''}`} onClick={() => { setSeccion('ventas'); setMenuAbierto(false) }}>
             <i className="bi bi-tag-fill" /> Mis ofertas de venta
-          </button>
-          <button className={`dash-nav-item ${seccion === 'perfil' ? 'active' : ''}`} onClick={() => { setSeccion('perfil'); setMenuAbierto(false) }}>
-            <i className="bi bi-person-fill" /> Mi perfil
           </button>
           <button className={`dash-nav-item ${seccion === 'transacciones' ? 'active' : ''}`} onClick={() => { setSeccion('transacciones'); setMenuAbierto(false) }}>
             <i className="bi bi-arrow-left-right" /> Transacciones
@@ -357,7 +389,13 @@ export default function DashboardPage() {
           </button>
           <div className="dash-topbar-right">
             {esAdmin && <span className="dash-badge-admin">Admin</span>}
-            <div className="dash-avatar">{iniciales(perfil?.nombre_completo ?? null)}</div>
+            <div className="dash-avatar">
+                {perfil?.avatar_url
+                  ? /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={perfil.avatar_url} alt={perfil.nombre_completo ?? ''} className="dash-perfil-avatar-img" />
+                  : iniciales(perfil?.nombre_completo ?? null)
+                }
+              </div>
             <span className="dash-topbar-name">{perfil?.nombre_completo ?? 'Usuario'}</span>
           </div>
         </header>
@@ -574,8 +612,20 @@ export default function DashboardPage() {
                         : iniciales(perfil?.nombre_completo ?? null)
                       }
                     </div>
-                    <button type="button" className="dash-cambiar-foto">
-                      <i className="bi bi-camera-fill"></i> Cambiar foto
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                      onChange={handleCambiarFoto}
+                    />
+                    <button
+                      type="button"
+                      className="dash-cambiar-foto"
+                      disabled={subiendoFoto}
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      <i className="bi bi-camera-fill"></i> {subiendoFoto ? 'Subiendo...' : 'Cambiar foto'}
                     </button>
                   </div>
                   <div>
