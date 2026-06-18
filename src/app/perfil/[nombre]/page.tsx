@@ -13,10 +13,12 @@ interface Perfil {
   rol: 'usuario' | 'admin'
   created_at: string
   email: string | null
+  rut_personal: string | null
   telefono: string | null
   nombre_empresa: string | null
-  direccion: string | null
-  horario: string | null
+  rut_empresa: string | null
+  direccion_empresa: string | null
+  horario_atencion: string | null
 }
 
 interface OfertaResumen {
@@ -152,6 +154,10 @@ export default function PerfilPage({ params }: Props) {
             <span>{perfil?.email}</span>
           </div>
           <div className="perfil-info-row">
+            <i className="bi bi-file-earmark-person"></i>
+            <span>{perfil?.rut_personal}</span>
+          </div>
+          <div className="perfil-info-row">
             <i className="bi bi-telephone"></i>
             <span>{perfil?.telefono}</span>
           </div>
@@ -165,12 +171,16 @@ export default function PerfilPage({ params }: Props) {
             <span>{perfil?.nombre_empresa}</span>
           </div>
           <div className="perfil-info-row">
+            <i className="bi bi-briefcase"></i>
+            <span>{perfil?.rut_empresa}</span>
+          </div>
+          <div className="perfil-info-row">
             <i className="bi bi-geo-alt"></i>
-            <span>{perfil?.direccion}</span>
+            <span>{perfil?.direccion_empresa}</span>
           </div>
           <div className="perfil-info-row">
             <i className="bi bi-clock"></i>
-            <span>{perfil?.horario}</span>
+            <span>{perfil?.horario_atencion}</span>
           </div>
         </div>
 

@@ -14,12 +14,12 @@ interface Perfil {
   rol: 'usuario' | 'admin'
   created_at: string
   email: string | null
-  rut: string | null
+  rut_personal: string | null
   telefono: string | null
   nombre_empresa: string | null
   rut_empresa: string | null
-  direccion: string | null
-  horario: string | null
+  direccion_empresa: string | null
+  horario_atencion: string | null
 }
 
 interface Producto {
@@ -102,7 +102,7 @@ export default function DashboardPage() {
 
       const { data: p } = await supabase
         .from('perfiles')
-        .select('*')
+        .select('id, nombre_completo, avatar_url, rol, created_at, email, rut_personal, rut_empresa, nombre_empresa, direccion_empresa, telefono, horario_atencion')
         .eq('id', user.id)
         .single()
 
@@ -110,12 +110,12 @@ export default function DashboardPage() {
         setPerfil(p)
         setNombreEdit(p.nombre_completo ?? '')
         setEmailEdit(p.email ?? '')
-        setRutEdit(p.rut ?? '')
+        setRutEdit(p.rut_personal ?? '')
         setTelefonoEdit(p.telefono ?? '')
         setNombreEmpresaEdit(p.nombre_empresa ?? '')
         setRutEmpresaEdit(p.rut_empresa ?? '')
-        setDireccionEdit(p.direccion ?? '')
-        setHorarioEdit(p.horario ?? '')
+        setDireccionEdit(p.direccion_empresa ?? '')
+        setHorarioEdit(p.horario_atencion ?? '')
       }
       setCargando(false)
     }
@@ -229,12 +229,12 @@ export default function DashboardPage() {
       .update({
         nombre_completo: nombreEdit,
         email: emailEdit,
-        rut: rutEdit,
+        rut_personal: rutEdit,
         telefono: telefonoEdit,
         nombre_empresa: nombreEmpresaEdit,
         rut_empresa: rutEmpresaEdit,
-        direccion: direccionEdit,
-        horario: horarioEdit,
+        direccion_empresa: direccionEdit,
+        horario_atencion: horarioEdit,
       })
       .eq('id', perfil!.id)
     setGuardandoPerfil(false)
@@ -245,12 +245,12 @@ export default function DashboardPage() {
         ...prev,
         nombre_completo: nombreEdit,
         email: emailEdit,
-        rut: rutEdit,
+        rut_personal: rutEdit,
         telefono: telefonoEdit,
         nombre_empresa: nombreEmpresaEdit,
         rut_empresa: rutEmpresaEdit,
-        direccion: direccionEdit,
-        horario: horarioEdit,
+        direccion_empresa: direccionEdit,
+        horario_atencion: horarioEdit,
       } : prev)
       setAlertaPerfil({ tipo: 'success', texto: '¡Perfil actualizado correctamente!' })
     }
