@@ -30,7 +30,7 @@ type Props =
     }
 
 export default function OfferTable(props: Props) {
-  const { tipo, ofertas, duplicadoId, onEliminar, onEjecutarDirecto } = props
+  const { tipo, ofertas, duplicadoId, usuarioId, productoSlug, onEliminar, onEjecutarDirecto } = props
   const esVenta = tipo === 'venta'
 
   return (
@@ -99,6 +99,8 @@ export default function OfferTable(props: Props) {
                       <BuyDirectRow
                         key={`buy-${oferta.id}`}
                         oferta={oferta}
+                        usuarioId={usuarioId}
+                        productoSlug={productoSlug}
                         onEjecutar={onEjecutarDirecto as (id: string, nombre: string, cantidad: number) => Promise<boolean>}
                       />
                     </>
@@ -143,6 +145,8 @@ export default function OfferTable(props: Props) {
                       <SellDirectRow
                         key={`sell-${oferta.id}`}
                         oferta={oferta}
+                        usuarioId={usuarioId}
+                        productoSlug={productoSlug}
                         onEjecutar={onEjecutarDirecto as (id: string, nombre: string, cantidad: number) => Promise<boolean>}
                       />
                     </>
