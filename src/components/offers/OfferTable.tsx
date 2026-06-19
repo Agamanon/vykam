@@ -71,7 +71,9 @@ export default function OfferTable(props: Props) {
                           <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}`} className="oferta-perfil-link">
                             <strong>{oferta.vendedor}</strong>
                           </Link>
-                          <span className="badge-tu-oferta">Tu oferta</span>
+                          {usuarioId && usuarioId === oferta.vendedor_id && (
+                            <span className="badge-tu-oferta">Tu oferta</span>
+                          )}
                         </td>
                         <td>
                           <input className="form-control form-control-sm locked-input" value={oferta.cantidad} type="text" readOnly />
@@ -117,7 +119,9 @@ export default function OfferTable(props: Props) {
                           <Link href={`/perfil/${normalizarSlug(oferta.comprador)}`} className="oferta-perfil-link">
                             <strong>{oferta.comprador}</strong>
                           </Link>
-                          <span className="badge-tu-oferta-compra">Tu oferta</span>
+                          {usuarioId && usuarioId === oferta.comprador_id && (
+                            <span className="badge-tu-oferta-compra">Tu oferta</span>
+                          )}
                         </td>
                         <td>
                           <input className="form-control form-control-sm locked-input" value={oferta.cantidad} type="text" readOnly />
