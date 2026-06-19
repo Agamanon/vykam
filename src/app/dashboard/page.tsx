@@ -218,6 +218,28 @@ export default function DashboardPage() {
     setTransacciones((data ?? []) as Transaccion[])
   }
 
+  async function eliminarOfertaCompra(id: string) {
+    if (!confirm('¿Eliminar esta oferta de compra?')) return
+    const { error } = await supabase
+      .from('ofertas_compra')
+      .delete()
+      .eq('id', id)
+    if (!error) {
+      setMisCompras(prev => prev.filter(c => c.id !== id))
+    }
+  }
+
+  async function eliminarOfertaVenta(id: string) {
+    if (!confirm('¿Eliminar esta oferta de venta?')) return
+    const { error } = await supabase
+      .from('ofertas_venta')
+      .delete()
+      .eq('id', id)
+    if (!error) {
+      setMisVentas(prev => prev.filter(v => v.id !== id))
+    }
+  }
+
   async function cerrarSesion() {
     await supabase.auth.signOut()
     router.push('/login')
@@ -547,7 +569,7 @@ export default function DashboardPage() {
                   <p className="dash-empty">Aún no has publicado ofertas de compra.</p>
                 ) : (
                   <table className="dash-table">
-                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Valor total</th><th>Estado</th><th>Fecha</th></tr></thead>
+                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Valor total</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr></thead>
                     <tbody>
                       {misCompras.map(c => (
                         <tr key={c.id}>
@@ -557,6 +579,11 @@ export default function DashboardPage() {
                           <td>{formatPrecio(c.precio_pagado)}</td>
                           <td><span className="dash-estado activo-compra">{c.estado}</span></td>
                           <td>{formatFecha(c.created_at)}</td>
+                          <td>
+                            <button type="button" className="btn-action btn-danger-outline" onClick={() => eliminarOfertaCompra(c.id)}>
+                              <i className="bi bi-trash"></i> Eliminar
+                            </button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -576,7 +603,7 @@ export default function DashboardPage() {
                   <p className="dash-empty">Aún no has publicado productos.</p>
                 ) : (
                   <table className="dash-table">
-                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Valor total</th><th>Estado</th><th>Fecha</th></tr></thead>
+                    <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Valor total</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr></thead>
                     <tbody>
                       {misVentas.map(p => (
                         <tr key={p.id}>
@@ -586,6 +613,11 @@ export default function DashboardPage() {
                           <td>{formatPrecio(parseFloat(p.categoria ?? '0'))}</td>
                           <td><span className={`dash-estado ${p.estado}`}>{p.estado}</span></td>
                           <td>{formatFecha(p.created_at)}</td>
+                          <td>
+                            <button type="button" className="btn-action btn-danger-outline" onClick={() => eliminarOfertaVenta(p.id)}>
+                              <i className="bi bi-trash"></i> Eliminar
+                            </button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

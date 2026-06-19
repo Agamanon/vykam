@@ -2535,6 +2535,19 @@ footer p {
   color: #1e40af;
 }
 
+.btn-danger-outline {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger) !important;
+}
+
+.btn-danger-outline:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.25);
+}
+
 /* ===== LINKS DE PERFIL EN TABLA DE OFERTAS ===== */
 .oferta-perfil-link {
   color: inherit;
