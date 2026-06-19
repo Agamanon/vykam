@@ -218,6 +218,29 @@ export default function DashboardPage() {
     setTransacciones((data ?? []) as Transaccion[])
   }
 
+  async function eliminarTransaccion(id: string) {
+    if (!confirm('¿Eliminar esta transacción del historial?')) return
+    const { error } = await supabase
+      .from('transacciones')
+      .delete()
+      .eq('id', id)
+    if (!error) {
+      setTransacciones(prev => prev.filter(t => t.id !== id))
+    }
+  }
+
+  async function borrarHistorialTransacciones() {
+    if (!confirm('¿Borrar TODO el historial de transacciones? Esta acción no se puede deshacer.')) return
+    const ids = transacciones.map(t => t.id)
+    const { error } = await supabase
+      .from('transacciones')
+      .delete()
+      .in('id', ids)
+    if (!error) {
+      setTransacciones([])
+    }
+  }
+
   async function eliminarOfertaCompra(id: string) {
     if (!confirm('¿Eliminar esta oferta de compra?')) return
     const { error } = await supabase
@@ -783,14 +806,27 @@ export default function DashboardPage() {
           {/* ── TRANSACCIONES ── */}
           {seccion === 'transacciones' && (
             <div>
-              <h2 className="dash-title">Transacciones</h2>
-              <p className="dash-subtitle">Historial de compras y ventas directas completadas.</p>
+              <div className="dash-card-header" style={{ marginBottom: '1rem' }}>
+                <div>
+                  <h2 className="dash-title" style={{ margin: 0 }}>Transacciones</h2>
+                  <p className="dash-subtitle" style={{ margin: 0 }}>Historial de compras y ventas directas completadas.</p>
+                </div>
+                {transacciones.length > 0 && (
+                  <button
+                    type="button"
+                    className="btn-action btn-danger-outline"
+                    onClick={borrarHistorialTransacciones}
+                  >
+                    <i className="bi bi-trash"></i> Borrar historial
+                  </button>
+                )}
+              </div>
               <div className="dash-card">
                 {transacciones.length === 0 ? (
                   <p className="dash-empty">Aún no hay transacciones registradas.</p>
                 ) : (
                   <table className="dash-table">
-                    <thead><tr><th>Producto</th><th>Vendedor</th><th>Comprador</th><th>Cantidad</th><th>Precio unitario</th><th>Total</th><th>Tipo</th><th>Fecha</th></tr></thead>
+                    <thead><tr><th>Producto</th><th>Vendedor</th><th>Comprador</th><th>Cantidad</th><th>Precio unitario</th><th>Total</th><th>Tipo</th><th>Fecha</th><th>Acción</th></tr></thead>
                     <tbody>
                       {transacciones.map(t => (
                         <tr key={t.id}>
@@ -802,6 +838,15 @@ export default function DashboardPage() {
                           <td>{formatPrecio(t.total)}</td>
                           <td><span className={`dash-estado ${t.tipo === 'compra_directa' ? 'activo-compra' : 'activo'}`}>{t.tipo === 'compra_directa' ? 'compra' : 'venta'}</span></td>
                           <td>{formatFecha(t.created_at)}</td>
+                          <td>
+                            <button
+                              type="button"
+                              className="btn-action btn-danger-outline"
+                              onClick={() => eliminarTransaccion(t.id)}
+                            >
+                              <i className="bi bi-trash"></i> Eliminar
+                            </button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
