@@ -63,7 +63,7 @@ export default function OfferTable(props: Props) {
                     <>
                       <tr
                         key={oferta.id}
-                        className={`oferta-nueva ${duplicadoId === oferta.id ? 'oferta-highlight' : ''}`}
+                        className={`oferta-nueva ${usuarioId === oferta.vendedor_id ? 'oferta-propia-venta' : ''} ${duplicadoId === oferta.id ? 'oferta-highlight' : ''}`}
                         data-oferta-id={oferta.id}
                       >
                         <td>
@@ -113,7 +113,7 @@ export default function OfferTable(props: Props) {
                     <>
                       <tr
                         key={oferta.id}
-                        className={`oferta-nueva-compra ${duplicadoId === oferta.id ? 'oferta-highlight' : ''}`}
+                        className={`oferta-nueva-compra ${usuarioId === oferta.comprador_id ? 'oferta-propia-compra' : ''} ${duplicadoId === oferta.id ? 'oferta-highlight' : ''}`}
                         data-oferta-id={oferta.id}
                       >
                         <td>

@@ -1337,6 +1337,24 @@ footer p {
   vertical-align: middle;
 }
 
+.oferta-propia-venta {
+  background: linear-gradient(135deg, #bbf7d0 0%, #a7f3d0 100%) !important;
+  border-left: 4px solid var(--success-dark);
+}
+
+.oferta-propia-venta .locked-input {
+  color: var(--success-dark);
+}
+
+.oferta-propia-compra {
+  background: linear-gradient(135deg, #bfdbfe 0%, #bae6fd 100%) !important;
+  border-left: 4px solid var(--primary-dark);
+}
+
+.oferta-propia-compra .locked-input {
+  color: var(--primary-dark);
+}
+
 /* Animación al intentar publicar duplicado */
 @keyframes highlightExistente {
   0%, 100% {

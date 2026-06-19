@@ -6,7 +6,8 @@
       "Bash(mkdir -p \"C:/Users/Agama/Desktop/vykam_project/src/app/producto/[slug]\")",
       "Bash(npx tsc *)",
       "Bash(npm run *)",
-      "Bash(xargs grep *)"
+      "Bash(xargs grep *)",
+      "Bash(git add *)"
     ]
   }
 }
