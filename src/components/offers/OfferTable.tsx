@@ -85,17 +85,19 @@ export default function OfferTable(props: Props) {
                           <input className="form-control form-control-sm locked-input" value={oferta.total.toFixed(2)} type="text" readOnly />
                         </td>
                         <td>
-                          <button
-                            type="button"
-                            className="btn-action btn-vender"
-                            onClick={async () => {
-                              if (confirm('¿Eliminar esta oferta?')) {
-                                await onEliminar(oferta.id)
-                              }
-                            }}
-                          >
-                            <i className="bi bi-trash"></i> Quitar
-                          </button>
+                          {usuarioId === oferta.vendedor_id && (
+                            <button
+                              type="button"
+                              className="btn-action btn-vender"
+                              onClick={async () => {
+                                if (confirm('¿Eliminar esta oferta?')) {
+                                  await onEliminar(oferta.id)
+                                }
+                              }}
+                            >
+                              <i className="bi bi-trash"></i> Quitar
+                            </button>
+                          )}
                         </td>
                       </tr>
                       <BuyDirectRow
@@ -133,17 +135,19 @@ export default function OfferTable(props: Props) {
                           <input className="form-control form-control-sm locked-input" value={oferta.total.toFixed(2)} type="text" readOnly />
                         </td>
                         <td>
-                          <button
-                            type="button"
-                            className="btn-action btn-comprar"
-                            onClick={async () => {
-                              if (confirm('¿Eliminar esta oferta?')) {
-                                await onEliminar(oferta.id)
-                              }
-                            }}
-                          >
-                            <i className="bi bi-trash"></i> Quitar
-                          </button>
+                          {usuarioId === oferta.comprador_id && (
+                            <button
+                              type="button"
+                              className="btn-action btn-comprar"
+                              onClick={async () => {
+                                if (confirm('¿Eliminar esta oferta?')) {
+                                  await onEliminar(oferta.id)
+                                }
+                              }}
+                            >
+                              <i className="bi bi-trash"></i> Quitar
+                            </button>
+                          )}
                         </td>
                       </tr>
                       <SellDirectRow
