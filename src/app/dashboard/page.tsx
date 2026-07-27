@@ -345,7 +345,7 @@ export default function DashboardPage() {
     const p = PRODUCTOS.find(p => p.slug === slug)
     if (!p) return slug
     const nombre = p.marca === p.nombre ? p.nombre : `${p.marca} ${p.nombre}`
-    return `${nombre} (${p.cantidad} ${p.unidad})`
+    return `${nombre} · ${p.detalle}`
   }
 
   function iniciales(nombre: string | null) {
