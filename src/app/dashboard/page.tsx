@@ -388,11 +388,11 @@ export default function DashboardPage() {
           <button className={`dash-nav-item ${seccion === 'perfil' ? 'active' : ''}`} onClick={() => { setSeccion('perfil'); setMenuAbierto(false) }}>
             <i className="bi bi-person-fill" /> Mi perfil
           </button>
-          <button className={`dash-nav-item ${seccion === 'compras' ? 'active' : ''}`} onClick={() => { setSeccion('compras'); setMenuAbierto(false) }}>
-            <i className="bi bi-cart-fill" /> Mis ofertas de compra
-          </button>
           <button className={`dash-nav-item ${seccion === 'ventas' ? 'active' : ''}`} onClick={() => { setSeccion('ventas'); setMenuAbierto(false) }}>
             <i className="bi bi-tag-fill" /> Mis ofertas de venta
+          </button>
+          <button className={`dash-nav-item ${seccion === 'compras' ? 'active' : ''}`} onClick={() => { setSeccion('compras'); setMenuAbierto(false) }}>
+            <i className="bi bi-cart-fill" /> Mis ofertas de compra
           </button>
           <button className={`dash-nav-item ${seccion === 'transacciones' ? 'active' : ''}`} onClick={() => { setSeccion('transacciones'); setMenuAbierto(false) }}>
             <i className="bi bi-arrow-left-right" /> Transacciones
