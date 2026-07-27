@@ -265,6 +265,18 @@ export default function DashboardPage() {
     }
   }
 
+  async function borrarTodasLasVentas() {
+    if (!confirm('¿Estás seguro de que quieres eliminar todas tus ofertas de venta? Esta acción no se puede deshacer.')) return
+    const ids = misVentas.map(v => v.id)
+    const { error } = await supabase
+      .from('ofertas_venta')
+      .delete()
+      .in('id', ids)
+    if (!error) {
+      setMisVentas([])
+    }
+  }
+
   async function cerrarSesion() {
     await supabase.auth.signOut()
     router.push('/login')
@@ -635,8 +647,21 @@ export default function DashboardPage() {
           {/* ── MIS VENTAS ── */}
           {seccion === 'ventas' && (
             <div>
-              <h2 className="dash-title">Mis ofertas de venta</h2>
-              <p className="dash-subtitle">Tus ofertas de venta publicadas.</p>
+              <div className="dash-card-header" style={{ marginBottom: '0.5rem' }}>
+                <div>
+                  <h2 className="dash-title" style={{ margin: 0 }}>Mis ofertas de venta</h2>
+                  <p className="dash-subtitle" style={{ margin: 0 }}>Tus ofertas de venta publicadas.</p>
+                </div>
+                {misVentas.length > 0 && (
+                  <button
+                    type="button"
+                    className="btn-action btn-danger-outline"
+                    onClick={borrarTodasLasVentas}
+                  >
+                    <i className="bi bi-trash"></i> Borrar historial
+                  </button>
+                )}
+              </div>
               <div className="dash-card">
                 {misVentas.length === 0 ? (
                   <p className="dash-empty">Aún no has publicado productos.</p>
