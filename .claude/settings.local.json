@@ -9,7 +9,10 @@
       "Bash(xargs grep *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git -C \"E:/onedrive/Desktop/vykam\" add src/app/globals.css)",
+      "Bash(git -C E:/onedrive/Desktop/vykam commit -m ' *)",
+      "Bash(git *)"
     ]
   }
 }
