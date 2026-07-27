@@ -206,6 +206,13 @@ export default function RegistroPage() {
             Continuar con Google
           </button>
 
+          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+            <Link href="/login" className="forgot-link">
+              <i className="bi bi-arrow-left" style={{ marginRight: '0.25rem' }}></i>
+              Regresar
+            </Link>
+          </div>
+
           {/* Footer del card */}
           <div className="login-footer">
             ¿Ya tienes cuenta?{' '}
