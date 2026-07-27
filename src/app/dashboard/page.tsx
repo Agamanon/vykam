@@ -498,6 +498,20 @@ export default function DashboardPage() {
                     <p className="dash-stat-value">{transacciones.filter(t => t.comprador_id === perfil?.id).length}</p>
                   </div>
                 </div>
+                <div className="dash-stat-card green">
+                  <div className="dash-stat-icon"><i className="bi bi-box-seam-fill" /></div>
+                  <div>
+                    <p className="dash-stat-label">Unidades vendidas</p>
+                    <p className="dash-stat-value">{transacciones.filter(t => t.vendedor_id === perfil?.id).reduce((s, t) => s + t.cantidad, 0)}</p>
+                  </div>
+                </div>
+                <div className="dash-stat-card blue">
+                  <div className="dash-stat-icon"><i className="bi bi-box-seam-fill" /></div>
+                  <div>
+                    <p className="dash-stat-label">Unidades compradas</p>
+                    <p className="dash-stat-value">{transacciones.filter(t => t.comprador_id === perfil?.id).reduce((s, t) => s + t.cantidad, 0)}</p>
+                  </div>
+                </div>
               </div>
 
               {/* Últimas ofertas de venta */}
