@@ -461,7 +461,7 @@ export default function DashboardPage() {
                     <p className="dash-stat-value">{productosActivos}</p>
                   </div>
                 </div>
-                <div className="dash-stat-card orange">
+                <div className="dash-stat-card green">
                   <div className="dash-stat-icon"><i className="bi bi-graph-up-arrow" /></div>
                   <div>
                     <p className="dash-stat-label">Total de ventas</p>
