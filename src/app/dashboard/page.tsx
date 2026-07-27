@@ -53,7 +53,9 @@ interface Transaccion {
   id: string
   producto_slug: string
   vendedor: string
+  vendedor_id: string
   comprador: string
+  comprador_id: string
   cantidad: number
   precio: number
   total: number
@@ -212,7 +214,7 @@ export default function DashboardPage() {
     if (!user) return
     const { data } = await supabase
       .from('transacciones')
-      .select('id, producto_slug, vendedor, comprador, cantidad, precio, total, tipo, created_at')
+      .select('id, producto_slug, vendedor, vendedor_id, comprador, comprador_id, cantidad, precio, total, tipo, created_at')
       .or(`vendedor_id.eq.${user.id},comprador_id.eq.${user.id}`)
       .order('created_at', { ascending: false })
     setTransacciones((data ?? []) as Transaccion[])
@@ -486,14 +488,14 @@ export default function DashboardPage() {
                   <div className="dash-stat-icon"><i className="bi bi-arrow-left-right" /></div>
                   <div>
                     <p className="dash-stat-label">Ventas realizadas</p>
-                    <p className="dash-stat-value">{transacciones.filter(t => t.tipo === 'venta_directa').length}</p>
+                    <p className="dash-stat-value">{transacciones.filter(t => t.vendedor_id === perfil?.id).length}</p>
                   </div>
                 </div>
                 <div className="dash-stat-card blue">
                   <div className="dash-stat-icon"><i className="bi bi-arrow-left-right" /></div>
                   <div>
                     <p className="dash-stat-label">Compras realizadas</p>
-                    <p className="dash-stat-value">{transacciones.filter(t => t.tipo === 'compra_directa').length}</p>
+                    <p className="dash-stat-value">{transacciones.filter(t => t.comprador_id === perfil?.id).length}</p>
                   </div>
                 </div>
               </div>
