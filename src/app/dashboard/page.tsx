@@ -97,6 +97,7 @@ export default function DashboardPage() {
   const [guardandoPerfil, setGuardandoPerfil] = useState(false)
   const [subiendoFoto, setSubiendoFoto] = useState(false)
   const [alertaPerfil, setAlertaPerfil] = useState<{ tipo: 'error' | 'success'; texto: string } | null>(null)
+  const [erroresPerfil, setErroresPerfil] = useState<Record<string, string>>({})
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // ── Carga inicial ──────────────────────────────────────────────
@@ -326,6 +327,20 @@ export default function DashboardPage() {
 
   async function guardarPerfil(e: React.FormEvent) {
     e.preventDefault()
+    const errores: Record<string, string> = {}
+    if (!nombreEdit.trim())        errores.nombre_completo  = 'Este campo es obligatorio'
+    if (!emailEdit.trim())         errores.email            = 'Este campo es obligatorio'
+    if (!rutEdit.trim())           errores.rut_personal     = 'Este campo es obligatorio'
+    if (!telefonoEdit.trim())      errores.telefono         = 'Este campo es obligatorio'
+    if (!nombreEmpresaEdit.trim()) errores.nombre_empresa   = 'Este campo es obligatorio'
+    if (!rutEmpresaEdit.trim())    errores.rut_empresa      = 'Este campo es obligatorio'
+    if (!direccionEdit.trim())     errores.direccion_empresa = 'Este campo es obligatorio'
+    if (!horarioEdit.trim())       errores.horario_atencion = 'Este campo es obligatorio'
+    if (Object.keys(errores).length > 0) {
+      setErroresPerfil(errores)
+      return
+    }
+    setErroresPerfil({})
     setGuardandoPerfil(true)
     setAlertaPerfil(null)
     const { error } = await supabase
@@ -771,32 +786,36 @@ export default function DashboardPage() {
                     <label className="form-label">Nombre completo</label>
                     <div className="input-wrapper">
                       <i className="bi bi-person-fill input-icon" />
-                      <input type="text" className="form-input" value={nombreEdit} onChange={e => setNombreEdit(e.target.value)} placeholder="Tu nombre completo" />
+                      <input required type="text" className="form-input" value={nombreEdit} onChange={e => setNombreEdit(e.target.value)} placeholder="Tu nombre completo" />
                     </div>
+                    {erroresPerfil.nombre_completo && <p className="dash-field-error">{erroresPerfil.nombre_completo}</p>}
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">Correo electrónico</label>
                     <div className="input-wrapper">
                       <i className="bi bi-envelope-fill input-icon" />
-                      <input type="email" className="form-input" value={emailEdit} onChange={e => setEmailEdit(e.target.value)} placeholder="tu@email.com" />
+                      <input required type="email" className="form-input" value={emailEdit} onChange={e => setEmailEdit(e.target.value)} placeholder="tu@email.com" />
                     </div>
+                    {erroresPerfil.email && <p className="dash-field-error">{erroresPerfil.email}</p>}
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">RUT personal</label>
                     <div className="input-wrapper">
                       <i className="bi bi-file-earmark-person-fill input-icon" />
-                      <input type="text" className="form-input" value={rutEdit} onChange={e => setRutEdit(e.target.value)} placeholder="12.345.678-9" />
+                      <input required type="text" className="form-input" value={rutEdit} onChange={e => setRutEdit(e.target.value)} placeholder="12.345.678-9" />
                     </div>
+                    {erroresPerfil.rut_personal && <p className="dash-field-error">{erroresPerfil.rut_personal}</p>}
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">Teléfono</label>
                     <div className="input-wrapper">
                       <i className="bi bi-telephone-fill input-icon" />
-                      <input type="tel" className="form-input" value={telefonoEdit} onChange={e => setTelefonoEdit(e.target.value)} placeholder="+56 9 1234 5678" />
+                      <input required type="tel" className="form-input" value={telefonoEdit} onChange={e => setTelefonoEdit(e.target.value)} placeholder="+56 9 1234 5678" />
                     </div>
+                    {erroresPerfil.telefono && <p className="dash-field-error">{erroresPerfil.telefono}</p>}
                   </div>
 
                   <p className="dash-perfil-section-label" style={{ marginTop: '1.75rem' }}>INFORMACIÓN DE EMPRESA</p>
@@ -805,32 +824,36 @@ export default function DashboardPage() {
                     <label className="form-label">Nombre de la empresa</label>
                     <div className="input-wrapper">
                       <i className="bi bi-building input-icon" />
-                      <input type="text" className="form-input" value={nombreEmpresaEdit} onChange={e => setNombreEmpresaEdit(e.target.value)} placeholder="Mi Empresa S.A." />
+                      <input required type="text" className="form-input" value={nombreEmpresaEdit} onChange={e => setNombreEmpresaEdit(e.target.value)} placeholder="Mi Empresa S.A." />
                     </div>
+                    {erroresPerfil.nombre_empresa && <p className="dash-field-error">{erroresPerfil.nombre_empresa}</p>}
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">RUT de la empresa</label>
                     <div className="input-wrapper">
                       <i className="bi bi-briefcase-fill input-icon" />
-                      <input type="text" className="form-input" value={rutEmpresaEdit} onChange={e => setRutEmpresaEdit(e.target.value)} placeholder="76.543.210-K" />
+                      <input required type="text" className="form-input" value={rutEmpresaEdit} onChange={e => setRutEmpresaEdit(e.target.value)} placeholder="76.543.210-K" />
                     </div>
+                    {erroresPerfil.rut_empresa && <p className="dash-field-error">{erroresPerfil.rut_empresa}</p>}
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">Dirección de la empresa</label>
                     <div className="input-wrapper">
                       <i className="bi bi-geo-alt-fill input-icon" />
-                      <input type="text" className="form-input" value={direccionEdit} onChange={e => setDireccionEdit(e.target.value)} placeholder="Av. Principal 123, Santiago" />
+                      <input required type="text" className="form-input" value={direccionEdit} onChange={e => setDireccionEdit(e.target.value)} placeholder="Av. Principal 123, Santiago" />
                     </div>
+                    {erroresPerfil.direccion_empresa && <p className="dash-field-error">{erroresPerfil.direccion_empresa}</p>}
                   </div>
 
                   <div className="form-group">
                     <label className="form-label">Horario de atención</label>
                     <div className="input-wrapper">
                       <i className="bi bi-clock-fill input-icon" />
-                      <input type="text" className="form-input" value={horarioEdit} onChange={e => setHorarioEdit(e.target.value)} placeholder="Lun–Vie 9:00–18:00" />
+                      <input required type="text" className="form-input" value={horarioEdit} onChange={e => setHorarioEdit(e.target.value)} placeholder="Lun–Vie 9:00–18:00" />
                     </div>
+                    {erroresPerfil.horario_atencion && <p className="dash-field-error">{erroresPerfil.horario_atencion}</p>}
                   </div>
 
                   <button type="submit" className="btn-login" disabled={guardandoPerfil} style={{ marginTop: '0.5rem' }}>
