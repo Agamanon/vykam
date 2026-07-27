@@ -237,6 +237,13 @@ export default function LoginPage() {
             Continuar con Google
           </button>
 
+          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+            <Link href="/" className="forgot-link">
+              <i className="bi bi-arrow-left" style={{ marginRight: '0.25rem' }}></i>
+              Volver al sitio
+            </Link>
+          </div>
+
           <div className="login-footer">
             ¿No tienes cuenta?{' '}
             <Link href="/registro">Crear cuenta</Link>
