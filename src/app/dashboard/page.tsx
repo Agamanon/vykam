@@ -254,6 +254,18 @@ export default function DashboardPage() {
     }
   }
 
+  async function borrarTodasLasCompras() {
+    if (!confirm('¿Estás seguro de que quieres eliminar todas tus ofertas de compra? Esta acción no se puede deshacer.')) return
+    const ids = misCompras.map(c => c.id)
+    const { error } = await supabase
+      .from('ofertas_compra')
+      .delete()
+      .in('id', ids)
+    if (!error) {
+      setMisCompras([])
+    }
+  }
+
   async function eliminarOfertaVenta(id: string) {
     if (!confirm('¿Eliminar esta oferta de venta?')) return
     const { error } = await supabase
@@ -613,8 +625,21 @@ export default function DashboardPage() {
           {/* ── MIS COMPRAS ── */}
           {seccion === 'compras' && (
             <div>
-              <h2 className="dash-title">Mis ofertas de compra</h2>
-              <p className="dash-subtitle">Ofertas de compra que has publicado.</p>
+              <div className="dash-card-header" style={{ marginBottom: '0.5rem' }}>
+                <div>
+                  <h2 className="dash-title" style={{ margin: 0 }}>Mis ofertas de compra</h2>
+                  <p className="dash-subtitle" style={{ margin: 0 }}>Ofertas de compra que has publicado.</p>
+                </div>
+                {misCompras.length > 0 && (
+                  <button
+                    type="button"
+                    className="btn-action btn-danger-outline"
+                    onClick={borrarTodasLasCompras}
+                  >
+                    <i className="bi bi-trash"></i> Borrar historial
+                  </button>
+                )}
+              </div>
               <div className="dash-card">
                 {misCompras.length === 0 ? (
                   <p className="dash-empty">Aún no has publicado ofertas de compra.</p>
