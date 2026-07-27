@@ -475,7 +475,7 @@ export default function DashboardPage() {
                     <p className="dash-stat-value">{misCompras.length}</p>
                   </div>
                 </div>
-                <div className="dash-stat-card green">
+                <div className="dash-stat-card blue">
                   <div className="dash-stat-icon"><i className="bi bi-cash-stack" /></div>
                   <div>
                     <p className="dash-stat-label">Total de compras</p>
