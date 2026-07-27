@@ -486,7 +486,7 @@ export default function DashboardPage() {
                   <div className="dash-stat-icon"><i className="bi bi-arrow-left-right" /></div>
                   <div>
                     <p className="dash-stat-label">Ventas realizadas</p>
-                    <p className="dash-stat-value">{transacciones.filter(t => t.tipo === 'venta_directa').length}</p>
+                    <p className="dash-stat-value">{misVentas.length}</p>
                   </div>
                 </div>
                 <div className="dash-stat-card blue">
