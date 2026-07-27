@@ -454,7 +454,7 @@ export default function DashboardPage() {
               <p className="dash-subtitle">Aquí tienes un resumen de tu actividad en Vykam.</p>
 
               <div className="dash-stats">
-                <div className="dash-stat-card purple">
+                <div className="dash-stat-card green">
                   <div className="dash-stat-icon"><i className="bi bi-tag-fill" /></div>
                   <div>
                     <p className="dash-stat-label">Productos para vender</p>
