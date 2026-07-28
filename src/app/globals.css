@@ -396,15 +396,7 @@ footer p {
   box-shadow: var(--shadow);
   text-decoration: none;
   color: var(--dark);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   height: 100%;
-}
-
-.category-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--primary-light);
-  box-shadow: var(--shadow-xl);
-  color: var(--dark);
 }
 
 .category-card-icon {
@@ -528,7 +520,6 @@ footer p {
   gap: 8px;
   cursor: pointer;
   border: 1.5px solid transparent;
-  transition: opacity 0.2s ease;
 }
 
 .hero-btn-primary {
@@ -536,20 +527,10 @@ footer p {
   color: #fff;
 }
 
-.hero-btn-primary:hover {
-  background: var(--hero-blue-dark);
-  color: #fff;
-}
-
 .hero-btn-secondary {
   background: #000000;
   color: #fff;
   border-color: #000000;
-}
-
-.hero-btn-secondary:hover {
-  background: #000000;
-  color: #fff;
 }
 
 .hero-categories {
@@ -664,7 +645,6 @@ footer p {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 1px solid rgba(0, 0, 0, 0.04);
   height: 100%;
   display: flex;
@@ -672,12 +652,6 @@ footer p {
   position: relative;
   text-decoration: none;
   color: inherit;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-light);
 }
 
 .product-image-wrapper {
@@ -694,11 +668,6 @@ footer p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.product-card:hover .product-image-wrapper img {
-  transform: scale(1.08);
 }
 
 .product-badge {
@@ -760,7 +729,6 @@ footer p {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -774,31 +742,13 @@ footer p {
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-  transition: left 0.3s ease;
   z-index: 0;
-}
-
-.btn-product:hover::before {
-  left: 0;
 }
 
 .btn-product span,
 .btn-product i {
   position: relative;
   z-index: 1;
-}
-
-.btn-product i {
-  transition: transform 0.3s ease;
-}
-
-.btn-product:hover {
-  color: white;
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-product:hover i {
-  transform: translateX(4px);
 }
 
 /* ===== SECCIÓN DE CARACTERÍSTICAS (home) ===== */
