@@ -596,15 +596,7 @@ footer p {
 
 .product-item {
   margin-bottom: 2rem;
-  animation: fadeInUp 0.6s ease backwards;
 }
-
-.product-item:nth-child(1) { animation-delay: 0.1s; }
-.product-item:nth-child(2) { animation-delay: 0.2s; }
-.product-item:nth-child(3) { animation-delay: 0.3s; }
-.product-item:nth-child(4) { animation-delay: 0.2s; }
-.product-item:nth-child(5) { animation-delay: 0.25s; }
-.product-item:nth-child(6) { animation-delay: 0.3s; }
 
 .product-card {
   background: var(--white);
@@ -1076,7 +1068,6 @@ footer p {
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   padding: 0.4rem 0.65rem;
-  transition: all 0.2s ease;
   font-size: 0.9rem;
 }
 
@@ -1203,7 +1194,6 @@ footer p {
   font-size: 0.9rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   background: var(--white);
-  transition: all 0.2s ease;
   width: 100%;
 }
 
@@ -1323,37 +1313,6 @@ footer p {
   color: var(--primary-dark);
 }
 
-/* Animación al intentar publicar duplicado */
-@keyframes highlightExistente {
-  0%, 100% {
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-    box-shadow: none;
-  }
-  50% {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.4);
-  }
-}
-
-@keyframes highlightExistenteCompra {
-  0%, 100% {
-    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
-    box-shadow: none;
-  }
-  50% {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.4);
-  }
-}
-
-.oferta-highlight {
-  animation: highlightExistente 0.6s ease 3;
-}
-
-.oferta-nueva-compra.oferta-highlight {
-  animation: highlightExistenteCompra 0.6s ease 3;
-}
-
 /* ===== INPUTS BLOQUEADOS DE OFERTA PUBLICADA ===== */
 .locked-input {
   background-color: transparent !important;
@@ -1395,7 +1354,6 @@ footer p {
   font-size: 0.85rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   background: var(--white);
-  transition: all 0.2s ease;
   width: 100%;
   font-weight: 500;
 }
@@ -1459,7 +1417,6 @@ footer p {
   font-size: 0.85rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   background: var(--white);
-  transition: all 0.2s ease;
   width: 100%;
   font-weight: 500;
 }
@@ -1879,30 +1836,6 @@ footer p {
   }
 }
 
-@keyframes fadeInRow {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-    background-color: #d1fae5;
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInRowBuy {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-    background-color: #dbeafe;
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ================================================================
    DASHBOARD — Agregar al final de globals.css
    ================================================================ */
@@ -1925,7 +1858,6 @@ footer p {
   left: 0;
   height: 100vh;
   z-index: 200;
-  transition: transform 0.3s ease;
 }
 
 .dash-sidebar-header {
@@ -1970,7 +1902,6 @@ footer p {
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.2s ease;
   text-align: left;
 }
 
