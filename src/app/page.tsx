@@ -72,17 +72,8 @@ export default function HomePage() {
       {/* ===== CARACTERÍSTICAS ===== */}
       <section className="features">
         <div className="container">
-          <div className="row">
-            <div className="col-md-4">
-              <div className="feature-item">
-                <div className="feature-icon">
-                  <i className="bi bi-truck"></i>
-                </div>
-                <h5>Envío Rápido</h5>
-                <p>Recibe tus productos en tiempo récord con nuestro servicio de entrega</p>
-              </div>
-            </div>
-            <div className="col-md-4">
+          <div className="row justify-content-center">
+            <div className="col-md-6">
               <div className="feature-item">
                 <div className="feature-icon">
                   <i className="bi bi-shield-check"></i>
@@ -91,7 +82,7 @@ export default function HomePage() {
                 <p>Tus transacciones están protegidas con los más altos estándares de seguridad</p>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-6">
               <div className="feature-item">
                 <div className="feature-icon">
                   <i className="bi bi-headset"></i>
