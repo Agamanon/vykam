@@ -150,6 +150,10 @@ export default function PerfilPage({ params }: Props) {
         <div className="perfil-info-section">
           <div className="perfil-section-label">INFORMACIÓN PERSONAL</div>
           <div className="perfil-info-row">
+            <i className="bi bi-person"></i>
+            <span>{perfil?.nombre_completo}</span>
+          </div>
+          <div className="perfil-info-row">
             <i className="bi bi-envelope"></i>
             <span>{perfil?.email}</span>
           </div>
