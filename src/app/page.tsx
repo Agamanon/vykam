@@ -21,17 +21,6 @@ export default function HomePage() {
             Descubre nuestra selección de productos de calidad.
             Compra y vende con confianza en la plataforma líder.
           </p>
-          <div className="hero-badges">
-            <div className="hero-badge">
-              <i className="bi bi-shield-check me-1"></i> Calidad Garantizada
-            </div>
-            <div className="hero-badge">
-              <i className="bi bi-truck me-1"></i> Envío Rápido
-            </div>
-            <div className="hero-badge">
-              <i className="bi bi-star-fill me-1"></i> Mejores Precios
-            </div>
-          </div>
         </div>
       </section>
 
