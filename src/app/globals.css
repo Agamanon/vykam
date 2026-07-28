@@ -184,6 +184,14 @@ body {
   margin-left: 0.5rem;
 }
 
+/* Bootstrap's base .btn:hover changes color/background-color via CSS
+   custom properties that are undefined here, which turns the text
+   black on hover. Reassert the same gradient and white text. */
+.btn-search:hover {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: white;
+}
+
 .search-results-dropdown {
   display: none;
   position: absolute;
