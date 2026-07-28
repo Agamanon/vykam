@@ -347,12 +347,6 @@ footer p {
   justify-content: center;
   color: white;
   text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-  background: var(--primary);
-  transform: translateY(-3px);
 }
 
 /* ===== TARJETAS DE CATEGORÍA ===== */
@@ -840,10 +834,6 @@ footer p {
   font-weight: 500;
 }
 
-.breadcrumb-custom a:hover {
-  text-decoration: underline;
-}
-
 /* ===== FILTROS (categorías) ===== */
 .filters-bar {
   background: var(--white);
@@ -887,13 +877,7 @@ footer p {
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 500;
-  transition: all 0.3s ease;
   border: 1px solid transparent;
-}
-
-.category-pill:hover {
-  background: var(--primary-light);
-  color: var(--primary);
 }
 
 .category-pill.active {
@@ -939,11 +923,6 @@ footer p {
   height: auto;
   position: relative;
   z-index: 1;
-  transition: transform 0.4s ease;
-}
-
-.product-image-card:hover img {
-  transform: scale(1.05);
 }
 
 .product-badge-large {
@@ -1093,10 +1072,6 @@ footer p {
   border-bottom: none;
 }
 
-.market-table tr:hover {
-  background-color: var(--light);
-}
-
 .market-table input.form-control-sm {
   border-radius: 8px;
   border: 1px solid #e2e8f0;
@@ -1132,7 +1107,6 @@ footer p {
   font-weight: 600;
   text-decoration: none;
   font-size: 0.85rem;
-  transition: all 0.3s ease;
   white-space: nowrap;
   border: none;
   cursor: pointer;
@@ -1143,21 +1117,9 @@ footer p {
   color: white;
 }
 
-.btn-vender:hover {
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
-}
-
 .btn-comprar {
   background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: white;
-}
-
-.btn-comprar:hover {
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -1270,7 +1232,6 @@ footer p {
   font-size: 0.9rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1283,18 +1244,8 @@ footer p {
   background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
 }
 
-.btn-new-offer.sell:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
-}
-
 .btn-new-offer.buy {
   background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-}
-
-.btn-new-offer.buy:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -1573,10 +1524,6 @@ footer p {
   background: var(--light) !important;
 }
 
-.empty-row:hover {
-  background: var(--light) !important;
-}
-
 .empty-message {
   display: flex;
   flex-direction: column;
@@ -1621,12 +1568,6 @@ footer p {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s ease;
-}
-
-.back-link:hover {
-  color: var(--primary-dark);
-  transform: translateX(-3px);
 }
 
 .login-wrapper {
@@ -1740,11 +1681,6 @@ footer p {
   cursor: pointer;
   padding: 0.25rem;
   font-size: 1.05rem;
-  transition: color 0.2s ease;
-}
-
-.toggle-password:hover {
-  color: var(--primary);
 }
 
 .form-options {
@@ -1782,12 +1718,6 @@ footer p {
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.forgot-link:hover {
-  color: var(--primary-dark);
-  text-decoration: underline;
 }
 
 .btn-login {
@@ -1801,7 +1731,6 @@ footer p {
   font-size: 1rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   cursor: pointer;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1818,17 +1747,7 @@ footer p {
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-  transition: left 0.3s ease;
   z-index: 0;
-}
-
-.btn-login:hover::before {
-  left: 0;
-}
-
-.btn-login:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
 }
 
 .btn-login span,
@@ -1865,18 +1784,10 @@ footer p {
   font-size: 0.95rem;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-}
-
-.btn-google:hover {
-  border-color: var(--primary);
-  background: var(--light);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
 }
 
 .google-icon {
@@ -1898,12 +1809,6 @@ footer p {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s ease;
-}
-
-.login-footer a:hover {
-  color: var(--primary-dark);
-  text-decoration: underline;
 }
 
 .alert-msg {
@@ -2069,19 +1974,9 @@ footer p {
   text-align: left;
 }
 
-.dash-nav-item:hover {
-  background: rgba(255,255,255,0.08);
-  color: white;
-}
-
 .dash-nav-item.active {
   background: var(--primary);
   color: white;
-}
-
-.dash-nav-item.danger:hover {
-  background: rgba(239,68,68,0.15);
-  color: #f87171;
 }
 
 .dash-nav-item i {
@@ -2224,11 +2119,6 @@ footer p {
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  transition: background 0.2s ease;
-}
-
-.dash-cambiar-foto:hover {
-  background: rgba(0, 0, 0, 0.8);
 }
 
 .dash-perfil-nombre {
@@ -2305,12 +2195,6 @@ footer p {
   display: flex;
   align-items: center;
   gap: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.dash-stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
 }
 
 .dash-stat-icon {
@@ -2378,8 +2262,6 @@ footer p {
   padding: 0;
 }
 
-.dash-link:hover { text-decoration: underline; }
-
 /* ── Tabla ── */
 .dash-table {
   width: 100%;
@@ -2405,7 +2287,6 @@ footer p {
 }
 
 .dash-table tr:last-child td { border-bottom: none; }
-.dash-table tr:hover td { background: #f8fafc; }
 
 /* ── Estados ── */
 .dash-estado {
@@ -2564,22 +2445,10 @@ footer p {
   border: 1px solid var(--danger) !important;
 }
 
-.btn-danger-outline:hover {
-  background: var(--danger);
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.25);
-}
-
 /* ===== LINKS DE PERFIL EN TABLA DE OFERTAS ===== */
 .oferta-perfil-link {
   color: inherit;
   text-decoration: none;
-}
-
-.oferta-perfil-link:hover {
-  color: var(--primary);
-  text-decoration: underline;
 }
 
 /* ===== PÁGINA DE PERFIL PÚBLICO ===== */
@@ -2700,10 +2569,6 @@ footer p {
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
-}
-
-.perfil-back-link:hover {
-  text-decoration: underline;
 }
 
 .perfil-feedback {
