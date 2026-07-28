@@ -107,7 +107,14 @@ export default function Navbar() {
         {/* Logo */}
         <Link className="navbar-brand" href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Vykam - Comprar y Vender" />
+          <img src="/images/vykam-icon.svg" alt="Vykam" className="navbar-brand-icon" />
+          <span className="navbar-wordmark-col">
+            <span className="navbar-wordmark">
+              <span className="navbar-wordmark-v">v</span>y
+              <span className="navbar-wordmark-k">k</span>am
+            </span>
+            <span className="navbar-tagline">COMPRAR · VENDER</span>
+          </span>
         </Link>
 
         {/* Botón hamburguesa para móvil */}

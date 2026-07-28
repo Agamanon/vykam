@@ -89,17 +89,55 @@ body {
 .navbar-brand {
   display: flex;
   align-items: center;
+  gap: 13px;
   padding: 0;
 }
 
-.navbar-brand img {
-  height: 100px;
-  width: auto;
+.navbar-brand-icon {
+  height: 42px;
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.navbar-wordmark-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navbar-wordmark {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #0F2A4A;
+}
+
+.navbar-wordmark-v {
+  color: #22A65A;
+}
+
+.navbar-wordmark-k {
+  color: #2952E3;
+}
+
+.navbar-tagline {
+  font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: #8A96A8;
 }
 
 @media (max-width: 768px) {
-  .navbar-brand img {
-    height: 70px;
+  .navbar-brand-icon {
+    height: 36px;
+    width: 36px;
+  }
+
+  .navbar-wordmark {
+    font-size: 19px;
   }
 }
 
