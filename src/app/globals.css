@@ -542,14 +542,14 @@ footer p {
 }
 
 .hero-btn-secondary {
-  background: transparent;
-  color: var(--hero-ink);
-  border-color: var(--hero-line);
+  background: #000000;
+  color: #fff;
+  border-color: #000000;
 }
 
 .hero-btn-secondary:hover {
-  background: #fff;
-  color: var(--hero-ink);
+  background: #000000;
+  color: #fff;
 }
 
 .hero-categories {
