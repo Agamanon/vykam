@@ -68,23 +68,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-
-      {/* ===== CARACTERÍSTICAS ===== */}
-      <section className="features">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-4 text-center">
-              <div className="feature-item">
-                <div className="feature-icon">
-                  <i className="bi bi-headset"></i>
-                </div>
-                <h5>Soporte 24/7</h5>
-                <p>Nuestro equipo está disponible para ayudarte en cualquier momento</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   )
 }
