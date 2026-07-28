@@ -18,8 +18,10 @@ export default function HomePage() {
         <div className="container hero-content text-center">
           <h1>Bienvenido a Vykam</h1>
           <p>
-            Descubre nuestra selección de productos de calidad.
-            Compra y vende con confianza en la plataforma líder.
+            Vykam es el sitio web número 1º en Market Place de Chile respecto a 3 tipos de productos
+            de papel del mercado (Papel Higiénico, Toalla de Papel y Servilletas). Descubre nuestra
+            selección de productos de papel. Compra y vende con confianza en la plataforma líder de
+            Chile.
           </p>
         </div>
       </section>
