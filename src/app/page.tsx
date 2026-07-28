@@ -73,16 +73,7 @@ export default function HomePage() {
       <section className="features">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-md-6">
-              <div className="feature-item">
-                <div className="feature-icon">
-                  <i className="bi bi-shield-check"></i>
-                </div>
-                <h5>Compra Segura</h5>
-                <p>Tus transacciones están protegidas con los más altos estándares de seguridad</p>
-              </div>
-            </div>
-            <div className="col-md-6">
+            <div className="col-md-4 text-center">
               <div className="feature-item">
                 <div className="feature-icon">
                   <i className="bi bi-headset"></i>
