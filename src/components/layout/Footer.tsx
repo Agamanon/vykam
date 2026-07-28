@@ -8,6 +8,7 @@
 // ================================================================
 
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Footer() {
   const pathname = usePathname()
@@ -18,8 +19,22 @@ export default function Footer() {
   return (
     <footer>
       <div className="container">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo-blanco.svg" alt="Vykam" className="footer-logo" />
+        <div className="footer-brand">
+          <Image
+            src="/images/vykam-icon.svg"
+            alt="Vykam"
+            width={44}
+            height={44}
+            className="footer-brand-icon"
+          />
+          <span className="footer-wordmark-col">
+            <span className="footer-wordmark">
+              <span className="footer-wordmark-v">v</span>y
+              <span className="footer-wordmark-k">k</span>am
+            </span>
+            <span className="footer-tagline">COMPRAR · VENDER</span>
+          </span>
+        </div>
         <p>Tu plataforma de confianza para comprar y vender</p>
 
         {/* Redes sociales */}
