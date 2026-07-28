@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Poppins, Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './globals.css'
@@ -14,6 +14,28 @@ const poppins = Poppins({
   display: 'swap',
 })
 
+// Fuentes usadas en el hero rediseñado de la home
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '700'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['500'],
+  variable: '--font-ibm-plex-mono',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Vykam | Marketplace de Papel',
   description: 'Marketplace B2B de productos de papel',
@@ -25,7 +47,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={poppins.variable}>
+    <html
+      lang="es"
+      className={`${poppins.variable} ${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}
+    >
       <body suppressHydrationWarning>
         <Navbar />
         {children}

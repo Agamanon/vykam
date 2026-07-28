@@ -12,7 +12,8 @@
       "Bash(git push *)",
       "Bash(git -C \"E:/onedrive/Desktop/vykam\" add src/app/globals.css)",
       "Bash(git -C E:/onedrive/Desktop/vykam commit -m ' *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Read(//e//**)"
     ]
   }
 }
