@@ -25,7 +25,10 @@ export default function HomePage() {
             <h1 className="hero-title">
               Bienvenido a
               <br />
-              <span className="hero-title-accent">Vykam</span>
+              <span className="hero-title-accent">
+                <span className="hero-title-accent-v">V</span>y
+                <span className="hero-title-accent-k">k</span>am
+              </span>
             </h1>
             <p className="hero-subtitle">
               <b>N.º 1 en Chile</b> en 3 categorías del mercado del papel — papel higiénico, toalla de

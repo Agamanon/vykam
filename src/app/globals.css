@@ -529,7 +529,15 @@ footer p {
 }
 
 .hero-title-accent {
-  color: var(--hero-blue);
+  color: var(--hero-ink);
+}
+
+.hero-title-accent-v {
+  color: #22A65A;
+}
+
+.hero-title-accent-k {
+  color: #2952E3;
 }
 
 .hero-subtitle {
