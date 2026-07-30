@@ -1,4 +1,5 @@
 // Página de detalle de producto con tablas de ofertas
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getProductoBySlug, getCategoriaBySlug, PRODUCTOS } from '@/lib/productos'
@@ -12,6 +13,15 @@ interface Props {
 // Pre-genera las rutas estáticas para cada producto
 export function generateStaticParams() {
   return PRODUCTOS.map(p => ({ slug: p.slug }))
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  return {
+    alternates: {
+      canonical: `/producto/${slug}`,
+    },
+  }
 }
 
 export default async function ProductoPage({ params }: Props) {

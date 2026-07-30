@@ -1,8 +1,15 @@
 // Página de inicio: hero, categorías, productos destacados y características
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getProductosDestacados, CATEGORIAS, getProductosByCategoria } from '@/lib/productos'
 import ProductCard from '@/components/product/ProductCard'
 import CategoryCard from '@/components/product/CategoryCard'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 export default function HomePage() {
   const destacados = getProductosDestacados()

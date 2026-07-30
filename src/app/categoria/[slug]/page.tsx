@@ -1,4 +1,5 @@
 // Página de categoría: muestra todos los productos de una categoría
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import {
   getCategoriaBySlug,
@@ -16,6 +17,15 @@ interface Props {
 // Pre-genera las rutas estáticas para cada categoría
 export function generateStaticParams() {
   return CATEGORIAS.map(cat => ({ slug: cat.slug }))
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  return {
+    alternates: {
+      canonical: `/categoria/${slug}`,
+    },
+  }
 }
 
 export default async function CategoriaPage({ params }: Props) {

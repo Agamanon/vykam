@@ -23,7 +23,32 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(pkill -f \"next start\")",
       "Bash(pkill -f \"next-server\")",
-      "Bash(mv src/app/favicon.ico public/favicon.ico)"
+      "Bash(mv src/app/favicon.ico public/favicon.ico)",
+      "Bash(pkill -f \"node.*next\")",
+      "Bash(netstat -ano)",
+      "PowerShell(Stop-Process *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3910/robots.txt)",
+      "Bash(curl -s http://localhost:3910/robots.txt)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3910/sitemap.xml)",
+      "Bash(curl -s http://localhost:3910/sitemap.xml)",
+      "Bash(curl -s -o /dev/null -w \"robots: %{http_code}\\\\n\" http://localhost:3910/robots.txt)",
+      "Bash(curl -s -o /dev/null -w \"sitemap: %{http_code}\\\\n\" http://localhost:3910/sitemap.xml)",
+      "Bash(curl -sD - -o /dev/null http://localhost:3910/robots.txt)",
+      "Bash(curl -sD - -o /dev/null http://localhost:3910/sitemap.xml)",
+      "Bash(curl -sD - -o /dev/null http://localhost:3910/this-route-does-not-exist-xyz)",
+      "Bash(env)",
+      "Bash(curl -s --noproxy '*' -o /dev/null -w \"robots \\(noproxy\\): %{http_code}\\\\n\" http://127.0.0.1:3910/robots.txt)",
+      "Bash(curl -s --noproxy '*' -o /dev/null -w \"sitemap \\(noproxy\\): %{http_code}\\\\n\" http://127.0.0.1:3910/sitemap.xml)",
+      "Bash(curl -s --noproxy '*' -o /dev/null -w \"home \\(noproxy\\): %{http_code}\\\\n\" http://127.0.0.1:3910/)",
+      "Bash(node -e \"const m=require\\('./.next/routes-manifest.json'\\); console.log\\(JSON.stringify\\(m.staticRoutes?.filter\\(r=>/robots|sitemap/.test\\(r.page||''\\)\\), null, 2\\)\\); console.log\\('dynamicRoutes:', JSON.stringify\\(m.dynamicRoutes?.filter\\(r=>/robots|sitemap/.test\\(r.page||''\\)\\), null, 2\\)\\); console.log\\('headers:', JSON.stringify\\(m.headers?.filter\\(h=>/robots|sitemap/.test\\(h.source||''\\)\\)\\)\\)\")",
+      "Bash(node -e \"const m=require\\('./.next/routes-manifest.json'\\); console.log\\(Object.keys\\(m\\)\\)\")",
+      "Bash(node -e \"const m=require\\('./.next/routes-manifest.json'\\); console.log\\('static:', JSON.stringify\\(m.staticRoutes.map\\(r=>r.page\\)\\)\\)\")",
+      "Bash(curl -s http://localhost:3920/robots.txt)",
+      "Bash(curl -s http://localhost:3920/sitemap.xml)",
+      "Bash(curl -s http://localhost:3920/)",
+      "Bash(curl -s http://localhost:3920/categoria/papel-higienico)",
+      "Bash(curl -s http://localhost:3920/producto/papel-higienico-noble-48-rollos)",
+      "Bash(curl -s http://localhost:3920/perfil/test-usuario)"
     ]
   }
 }

@@ -37,6 +37,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://vykam.com'),
   title: 'Vykam | Marketplace de Papel',
   description: 'Marketplace B2B de productos de papel',
   icons: {
