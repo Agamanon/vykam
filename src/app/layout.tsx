@@ -39,6 +39,14 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Vykam | Marketplace de Papel',
   description: 'Marketplace B2B de productos de papel',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
 }
 
 export default function RootLayout({

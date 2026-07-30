@@ -14,7 +14,16 @@
       "Bash(git -C E:/onedrive/Desktop/vykam commit -m ' *)",
       "Bash(git *)",
       "Read(//e//**)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(echo \"robots exit: $?\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3901/)",
+      "Bash(break)",
+      "Bash(curl -s http://localhost:3901/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3901/favicon.ico)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next start\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(mv src/app/favicon.ico public/favicon.ico)"
     ]
   }
 }
