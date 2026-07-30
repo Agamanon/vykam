@@ -1637,10 +1637,42 @@ footer p {
   margin-bottom: 2rem;
 }
 
-.login-logo {
-  height: 80px;
-  width: auto;
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   margin-bottom: 1.5rem;
+}
+
+.login-brand-icon {
+  height: 56px;
+  width: 56px;
+}
+
+.login-brand-wordmark {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #0F2A4A;
+}
+
+.login-brand-v {
+  color: #22A65A;
+}
+
+.login-brand-k {
+  color: #2952E3;
+}
+
+.login-brand-tagline {
+  font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: #8A96A8;
 }
 
 .login-title {
@@ -1900,8 +1932,12 @@ footer p {
   .login-title {
     font-size: 1.5rem;
   }
-  .login-logo {
-    height: 65px;
+  .login-brand-icon {
+    height: 44px;
+    width: 44px;
+  }
+  .login-brand-wordmark {
+    font-size: 23px;
   }
 .form-options {
     flex-direction: column;

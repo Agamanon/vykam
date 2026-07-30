@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import supabase from '@/lib/supabase'
 
 export default function LoginPage() {
@@ -144,8 +145,14 @@ export default function LoginPage() {
         <div className="login-card">
 
           <div className="login-header">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg" alt="Vykam" className="login-logo" />
+            <div className="login-brand">
+              <Image src="/images/vykam-icon.svg" alt="Vykam" width={56} height={56} className="login-brand-icon" />
+              <span className="login-brand-wordmark">
+                <span className="login-brand-v">v</span>y
+                <span className="login-brand-k">k</span>am
+              </span>
+              <span className="login-brand-tagline">COMPRAR · VENDER</span>
+            </div>
             <h1 className="login-title">Bienvenido de vuelta</h1>
             <p className="login-subtitle">Inicia sesión para continuar comprando y vendiendo</p>
           </div>
