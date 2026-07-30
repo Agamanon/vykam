@@ -1950,10 +1950,48 @@ footer p {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.dash-logo {
-  height: 48px;
-  width: auto;
-  filter: brightness(0) invert(1);
+.dash-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-brand-icon {
+  height: 40px;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.dash-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dash-brand-wordmark {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.dash-brand-v {
+  color: #4ED87F;
+}
+
+.dash-brand-k {
+  color: #7CA6FF;
+}
+
+.dash-brand-tagline {
+  font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: #A9C2D6;
 }
 
 .dash-nav {

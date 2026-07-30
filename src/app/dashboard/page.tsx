@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import supabase from '@/lib/supabase'
 import { PRODUCTOS } from '@/lib/productos'
 
@@ -417,8 +418,16 @@ export default function DashboardPage() {
       {/* ── SIDEBAR ── */}
       <aside className={`dash-sidebar ${menuAbierto ? 'open' : ''}`}>
         <div className="dash-sidebar-header">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Vykam" className="dash-logo" />
+          <div className="dash-brand">
+            <Image src="/images/vykam-icon.svg" alt="Vykam" width={40} height={40} className="dash-brand-icon" />
+            <span className="dash-brand-col">
+              <span className="dash-brand-wordmark">
+                <span className="dash-brand-v">v</span>y
+                <span className="dash-brand-k">k</span>am
+              </span>
+              <span className="dash-brand-tagline">COMPRAR · VENDER</span>
+            </span>
+          </div>
         </div>
 
         <nav className="dash-nav">
