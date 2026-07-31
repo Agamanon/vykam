@@ -80,12 +80,6 @@ export default function PublishOfferForm({ tipo, onPublicar }: Props) {
           <i className="bi bi-lock-fill"></i>
           <span>{esVenta ? 'Publica tu oferta de venta' : 'Publica tu oferta de compra'}</span>
         </div>
-        {esVenta && (
-          <div className="table-info">
-            <i className="bi bi-info-circle-fill"></i>
-            Ingresa la cantidad y el precio por unidad para calcular el total automáticamente.
-          </div>
-        )}
         <div className="new-offer-auth-msg">
           <i className="bi bi-person-circle"></i>
           <p>Debes iniciar sesión para publicar una oferta de {esVenta ? 'venta' : 'compra'}.</p>
