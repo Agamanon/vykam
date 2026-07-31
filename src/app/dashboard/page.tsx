@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import supabase from '@/lib/supabase'
 import { PRODUCTOS } from '@/lib/productos'
+import { normalizarSlug } from '@/lib/utils'
 
 // ── Tipos ──────────────────────────────────────────────────────────
 interface Perfil {
@@ -219,7 +220,33 @@ export default function DashboardPage() {
       .select('id, producto_slug, vendedor, vendedor_id, comprador, comprador_id, cantidad, precio, total, tipo, created_at')
       .or(`vendedor_id.eq.${user.id},comprador_id.eq.${user.id}`)
       .order('created_at', { ascending: false })
-    setTransacciones((data ?? []) as Transaccion[])
+
+    const transaccionesData = (data ?? []) as Transaccion[]
+
+    const idsUnicos = Array.from(
+      new Set(
+        transaccionesData.flatMap(t => [t.vendedor_id, t.comprador_id]).filter(Boolean)
+      )
+    )
+
+    const nombresActuales = new Map<string, string>()
+    if (idsUnicos.length > 0) {
+      const { data: perfiles } = await supabase
+        .from('perfiles')
+        .select('id, nombre_completo')
+        .in('id', idsUnicos)
+      for (const p of perfiles ?? []) {
+        if (p.nombre_completo) nombresActuales.set(p.id, p.nombre_completo)
+      }
+    }
+
+    setTransacciones(
+      transaccionesData.map(t => ({
+        ...t,
+        vendedor: nombresActuales.get(t.vendedor_id) ?? t.vendedor,
+        comprador: nombresActuales.get(t.comprador_id) ?? t.comprador,
+      }))
+    )
   }
 
   async function eliminarTransaccion(id: string) {
@@ -631,8 +658,18 @@ export default function DashboardPage() {
                       {transacciones.slice(0, 5).map(t => (
                         <tr key={t.id}>
                           <td>{nombreProducto(t.producto_slug)}</td>
-                          <td>{t.vendedor}</td>
-                          <td>{t.comprador}</td>
+                          <td>
+                            {t.vendedor}{' '}
+                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}`} className="oferta-ver-perfil-link">
+                              Ver perfil
+                            </Link>
+                          </td>
+                          <td>
+                            {t.comprador}{' '}
+                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}`} className="oferta-ver-perfil-link">
+                              Ver perfil
+                            </Link>
+                          </td>
                           <td>{t.cantidad}</td>
                           <td>{formatPrecio(t.total)}</td>
                           <td><span className={`dash-estado ${t.tipo === 'compra_directa' ? 'activo-compra' : 'activo'}`}>{t.tipo === 'compra_directa' ? 'compra' : 'venta'}</span></td>
@@ -929,8 +966,18 @@ export default function DashboardPage() {
                       {transacciones.map(t => (
                         <tr key={t.id}>
                           <td>{nombreProducto(t.producto_slug)}</td>
-                          <td>{t.vendedor}</td>
-                          <td>{t.comprador}</td>
+                          <td>
+                            {t.vendedor}{' '}
+                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}`} className="oferta-ver-perfil-link">
+                              Ver perfil
+                            </Link>
+                          </td>
+                          <td>
+                            {t.comprador}{' '}
+                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}`} className="oferta-ver-perfil-link">
+                              Ver perfil
+                            </Link>
+                          </td>
                           <td>{t.cantidad}</td>
                           <td>{formatPrecio(t.precio)}</td>
                           <td>{formatPrecio(t.total)}</td>

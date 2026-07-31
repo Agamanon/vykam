@@ -68,10 +68,10 @@ export default function OfferTable(props: Props) {
                       >
                         <td>
                           <i className="bi bi-person-fill-check text-success me-1"></i>
-                          <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}`} className="oferta-perfil-link">
+                          <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}?uid=${oferta.vendedor_id}`} className="oferta-perfil-link">
                             <strong>{oferta.vendedor}</strong>
                           </Link>
-                          <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}`} className="oferta-ver-perfil-link">
+                          <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}?uid=${oferta.vendedor_id}`} className="oferta-ver-perfil-link">
                             Ver perfil
                           </Link>
                           {usuarioId && usuarioId === oferta.vendedor_id && (
@@ -121,10 +121,10 @@ export default function OfferTable(props: Props) {
                       >
                         <td>
                           <i className="bi bi-person-fill-check text-primary me-1"></i>
-                          <Link href={`/perfil/${normalizarSlug(oferta.comprador)}`} className="oferta-perfil-link">
+                          <Link href={`/perfil/${normalizarSlug(oferta.comprador)}?uid=${oferta.comprador_id}`} className="oferta-perfil-link">
                             <strong>{oferta.comprador}</strong>
                           </Link>
-                          <Link href={`/perfil/${normalizarSlug(oferta.comprador)}`} className="oferta-ver-perfil-link">
+                          <Link href={`/perfil/${normalizarSlug(oferta.comprador)}?uid=${oferta.comprador_id}`} className="oferta-ver-perfil-link">
                             Ver perfil
                           </Link>
                           {usuarioId && usuarioId === oferta.comprador_id && (

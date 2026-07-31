@@ -31,10 +31,12 @@ interface OfertaResumen {
 
 interface Props {
   params: Promise<{ nombre: string }>
+  searchParams: Promise<{ uid?: string }>
 }
 
-export default function PerfilPage({ params }: Props) {
+export default function PerfilPage({ params, searchParams }: Props) {
   const { nombre: slugParam } = use(params)
+  const { uid } = use(searchParams)
 
   const [perfil, setPerfil] = useState<Perfil | null>(null)
   const [ofertasVenta, setOfertasVenta] = useState<OfertaResumen[]>([])
@@ -48,9 +50,13 @@ export default function PerfilPage({ params }: Props) {
         .from('perfiles')
         .select('*')
 
-      const encontrado = (perfiles ?? []).find(
+      let encontrado = (perfiles ?? []).find(
         (p: Perfil) => p.nombre_completo && normalizarSlug(p.nombre_completo) === slugParam
       )
+
+      if (!encontrado && uid) {
+        encontrado = (perfiles ?? []).find((p: Perfil) => p.id === uid)
+      }
 
       if (!encontrado) {
         setNoEncontrado(true)
@@ -79,7 +85,7 @@ export default function PerfilPage({ params }: Props) {
     }
 
     cargar()
-  }, [slugParam])
+  }, [slugParam, uid])
 
   const iniciales =
     perfil?.nombre_completo

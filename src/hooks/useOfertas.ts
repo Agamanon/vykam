@@ -45,8 +45,34 @@ export function useOfertas(productoSlug: string): UseOfertasReturn {
         .eq('producto_slug', productoSlug)
         .order('precio', { ascending: false }),
     ])
-    setOfertasVenta((ventas ?? []).map(mapVenta))
-    setOfertasCompra((compras ?? []).map(mapCompra))
+
+    const ventasMapeadas = (ventas ?? []).map(mapVenta)
+    const comprasMapeadas = (compras ?? []).map(mapCompra)
+
+    const idsUnicos = Array.from(
+      new Set([
+        ...ventasMapeadas.map(v => v.vendedor_id),
+        ...comprasMapeadas.map(c => c.comprador_id),
+      ].filter(Boolean))
+    )
+
+    const nombresActuales = new Map<string, string>()
+    if (idsUnicos.length > 0) {
+      const { data: perfiles } = await supabase
+        .from('perfiles')
+        .select('id, nombre_completo')
+        .in('id', idsUnicos)
+      for (const p of perfiles ?? []) {
+        if (p.nombre_completo) nombresActuales.set(p.id, p.nombre_completo)
+      }
+    }
+
+    setOfertasVenta(
+      ventasMapeadas.map(v => ({ ...v, vendedor: nombresActuales.get(v.vendedor_id) ?? v.vendedor }))
+    )
+    setOfertasCompra(
+      comprasMapeadas.map(c => ({ ...c, comprador: nombresActuales.get(c.comprador_id) ?? c.comprador }))
+    )
   }
 
   function mapVenta(row: Record<string, unknown>): OfertaVenta {
