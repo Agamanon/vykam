@@ -48,7 +48,9 @@
       "Bash(curl -s http://localhost:3920/)",
       "Bash(curl -s http://localhost:3920/categoria/papel-higienico)",
       "Bash(curl -s http://localhost:3920/producto/papel-higienico-noble-48-rollos)",
-      "Bash(curl -s http://localhost:3920/perfil/test-usuario)"
+      "Bash(curl -s http://localhost:3920/perfil/test-usuario)",
+      "Bash(node -e ' *)",
+      "Bash(npx eslint *)"
     ]
   }
 }

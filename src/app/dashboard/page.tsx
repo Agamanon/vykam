@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { use, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -67,11 +67,20 @@ interface Transaccion {
 
 type Seccion = 'resumen' | 'compras' | 'ventas' | 'perfil' | 'usuarios' | 'productos_admin' | 'transacciones'
 
+const SECCIONES_VALIDAS: Seccion[] = ['resumen', 'compras', 'ventas', 'perfil', 'usuarios', 'productos_admin', 'transacciones']
+
+interface Props {
+  searchParams: Promise<{ seccion?: string }>
+}
+
 // ── Componente principal ───────────────────────────────────────────
-export default function DashboardPage() {
+export default function DashboardPage({ searchParams }: Props) {
+  const { seccion: seccionInicial } = use(searchParams)
   const router = useRouter()
   const [perfil, setPerfil] = useState<Perfil | null>(null)
-  const [seccion, setSeccion] = useState<Seccion>('resumen')
+  const [seccion, setSeccion] = useState<Seccion>(
+    SECCIONES_VALIDAS.includes(seccionInicial as Seccion) ? (seccionInicial as Seccion) : 'resumen'
+  )
   const [cargando, setCargando] = useState(true)
   const [menuAbierto, setMenuAbierto] = useState(false)
 
@@ -660,13 +669,13 @@ export default function DashboardPage() {
                           <td>{nombreProducto(t.producto_slug)}</td>
                           <td>
                             {t.vendedor}{' '}
-                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}`} className="oferta-ver-perfil-link">
+                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}&from=dashboard&seccion=transacciones`} className="oferta-ver-perfil-link">
                               Ver perfil
                             </Link>
                           </td>
                           <td>
                             {t.comprador}{' '}
-                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}`} className="oferta-ver-perfil-link">
+                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}&from=dashboard&seccion=transacciones`} className="oferta-ver-perfil-link">
                               Ver perfil
                             </Link>
                           </td>
@@ -968,13 +977,13 @@ export default function DashboardPage() {
                           <td>{nombreProducto(t.producto_slug)}</td>
                           <td>
                             {t.vendedor}{' '}
-                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}`} className="oferta-ver-perfil-link">
+                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}&from=dashboard&seccion=transacciones`} className="oferta-ver-perfil-link">
                               Ver perfil
                             </Link>
                           </td>
                           <td>
                             {t.comprador}{' '}
-                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}`} className="oferta-ver-perfil-link">
+                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}&from=dashboard&seccion=transacciones`} className="oferta-ver-perfil-link">
                               Ver perfil
                             </Link>
                           </td>
