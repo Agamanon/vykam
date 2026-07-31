@@ -2541,6 +2541,17 @@ footer p {
   text-decoration: none;
 }
 
+.oferta-ver-perfil-link {
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.oferta-ver-perfil-link:hover {
+  text-decoration: underline;
+}
+
 /* ===== PÁGINA DE PERFIL PÚBLICO ===== */
 .perfil-page-bg {
   min-height: calc(100vh - 80px);
