@@ -71,7 +71,7 @@ export default function OfferTable(props: Props) {
                           <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}?uid=${oferta.vendedor_id}`} className="oferta-perfil-link">
                             <strong>{oferta.vendedor}</strong>
                           </Link>
-                          <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}?uid=${oferta.vendedor_id}`} className="oferta-ver-perfil-link">
+                          <Link href={`/perfil/${normalizarSlug(oferta.vendedor)}?uid=${oferta.vendedor_id}&from=producto&slug=${productoSlug}`} className="oferta-ver-perfil-link">
                             Ver perfil
                           </Link>
                           {usuarioId && usuarioId === oferta.vendedor_id && (
@@ -124,7 +124,7 @@ export default function OfferTable(props: Props) {
                           <Link href={`/perfil/${normalizarSlug(oferta.comprador)}?uid=${oferta.comprador_id}`} className="oferta-perfil-link">
                             <strong>{oferta.comprador}</strong>
                           </Link>
-                          <Link href={`/perfil/${normalizarSlug(oferta.comprador)}?uid=${oferta.comprador_id}`} className="oferta-ver-perfil-link">
+                          <Link href={`/perfil/${normalizarSlug(oferta.comprador)}?uid=${oferta.comprador_id}&from=producto&slug=${productoSlug}`} className="oferta-ver-perfil-link">
                             Ver perfil
                           </Link>
                           {usuarioId && usuarioId === oferta.comprador_id && (

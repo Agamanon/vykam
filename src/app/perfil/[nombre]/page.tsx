@@ -31,12 +31,16 @@ interface OfertaResumen {
 
 interface Props {
   params: Promise<{ nombre: string }>
-  searchParams: Promise<{ uid?: string }>
+  searchParams: Promise<{ uid?: string; from?: string; slug?: string }>
 }
 
 export default function PerfilPage({ params, searchParams }: Props) {
   const { nombre: slugParam } = use(params)
-  const { uid } = use(searchParams)
+  const { uid, from, slug } = use(searchParams)
+
+  const vieneDeProducto = from === 'producto' && !!slug
+  const volverHref = vieneDeProducto ? `/producto/${slug}` : '/'
+  const volverTexto = vieneDeProducto ? '← Volver' : '← Volver al sitio'
 
   const [perfil, setPerfil] = useState<Perfil | null>(null)
   const [ofertasVenta, setOfertasVenta] = useState<OfertaResumen[]>([])
@@ -196,8 +200,8 @@ export default function PerfilPage({ params, searchParams }: Props) {
 
         {/* ── Volver ── */}
         <div className="perfil-back">
-          <Link href="/" className="perfil-back-link">
-            ← Volver al sitio
+          <Link href={volverHref} className="perfil-back-link">
+            {volverTexto}
           </Link>
         </div>
 
