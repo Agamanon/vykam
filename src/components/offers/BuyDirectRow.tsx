@@ -34,7 +34,7 @@ export default function BuyDirectRow({ oferta, usuarioId, onEjecutar }: Props) {
   const total = cantidadNum > 0 ? (cantidadNum * oferta.precio).toFixed(2) : ''
 
   async function handleComprar() {
-    if (!nombreComprador.trim()) { alert('Por favor ingresa tu nombre como comprador'); return }
+    if (!usuarioId) { alert('Debes iniciar sesión para realizar una compra'); return }
     const cantNum = parseInt(cantidad) || 0
     if (cantNum <= 0) { alert('Por favor ingresa una cantidad válida'); return }
     if (cantNum > oferta.cantidad) {

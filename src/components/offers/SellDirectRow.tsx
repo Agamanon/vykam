@@ -34,7 +34,7 @@ export default function SellDirectRow({ oferta, usuarioId, onEjecutar }: Props) 
   const total = cantidadNum > 0 ? (cantidadNum * oferta.precio).toFixed(2) : ''
 
   async function handleVender() {
-    if (!nombreVendedor.trim()) { alert('Por favor ingresa tu nombre como vendedor'); return }
+    if (!usuarioId) { alert('Debes iniciar sesión para realizar una venta'); return }
     const cantNum = parseInt(cantidad) || 0
     if (cantNum <= 0) { alert('Por favor ingresa una cantidad válida'); return }
     if (cantNum > oferta.cantidad) {
