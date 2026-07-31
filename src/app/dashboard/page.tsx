@@ -669,13 +669,13 @@ export default function DashboardPage({ searchParams }: Props) {
                           <td>{nombreProducto(t.producto_slug)}</td>
                           <td>
                             {t.vendedor}{' '}
-                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}&from=dashboard&seccion=transacciones`} className="oferta-ver-perfil-link">
+                            <Link href={`/perfil/${normalizarSlug(t.vendedor)}?uid=${t.vendedor_id}&from=dashboard&seccion=resumen`} className="oferta-ver-perfil-link">
                               Ver perfil
                             </Link>
                           </td>
                           <td>
                             {t.comprador}{' '}
-                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}&from=dashboard&seccion=transacciones`} className="oferta-ver-perfil-link">
+                            <Link href={`/perfil/${normalizarSlug(t.comprador)}?uid=${t.comprador_id}&from=dashboard&seccion=resumen`} className="oferta-ver-perfil-link">
                               Ver perfil
                             </Link>
                           </td>
