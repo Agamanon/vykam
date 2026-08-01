@@ -16,16 +16,22 @@ export default function SellDirectRow({ oferta, usuarioId, onEjecutar }: Props) 
   const [cantidad, setCantidad] = useState('')
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data }) => {
-      const user = data.session?.user
-      if (!user) return
+    async function cargarNombre(user: { id: string } | null | undefined) {
+      if (!user) { setNombreVendedor(''); return }
       const { data: perfil } = await supabase
         .from('perfiles')
         .select('nombre_completo')
         .eq('id', user.id)
         .single()
-      if (perfil?.nombre_completo) setNombreVendedor(perfil.nombre_completo)
+      setNombreVendedor(perfil?.nombre_completo ?? '')
+    }
+
+    supabase.auth.getSession().then(({ data }) => cargarNombre(data.session?.user))
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      cargarNombre(session?.user)
     })
+    return () => listener.subscription.unsubscribe()
   }, [])
 
   if (usuarioId && usuarioId === oferta.comprador_id) return null
