@@ -101,7 +101,7 @@ export default function PublishOfferForm({ tipo, onPublicar }: Props) {
       {esVenta && (
         <div className="table-info">
           <i className="bi bi-info-circle-fill"></i>
-          Ingresa la cantidad y el precio por unidad para calcular el total automáticamente.
+          Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de venta.
         </div>
       )}
       <form className="new-offer-grid" onSubmit={handleSubmit}>

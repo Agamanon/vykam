@@ -149,7 +149,7 @@ export default function OfertasSection({ producto }: Props) {
 
           <div className="table-info">
             <i className="bi bi-info-circle-fill"></i>
-            Ingresa la cantidad y el precio por unidad para calcular el total automáticamente.
+            Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de venta.
           </div>
         </div>
       </section>
