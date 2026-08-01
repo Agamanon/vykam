@@ -66,7 +66,7 @@ export default function BuyDirectRow({ oferta, usuarioId, onEjecutar }: Props) {
         </div>
       </td>
       <td>
-        <input type="number" className="comprar-directo-cantidad" placeholder="0" min="1" max={oferta.cantidad} value={cantidad}
+        <input type="number" className="comprar-directo-cantidad" placeholder="0" min="1" max={oferta.cantidad} value={cantidad} disabled={!usuarioId}
           onChange={e => {
             const val = parseInt(e.target.value)
             setCantidad(!isNaN(val) && val > oferta.cantidad ? String(oferta.cantidad) : e.target.value)

@@ -36,6 +36,11 @@ export default function OfertasSection({ producto }: Props) {
     supabase.auth.getSession().then(({ data }) => {
       setUsuario(data.session?.user ?? null)
     })
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUsuario(session?.user ?? null)
+    })
+    return () => listener.subscription.unsubscribe()
   }, [])
 
   function nombreProducto() {
