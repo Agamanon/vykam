@@ -4,6 +4,7 @@ import { Producto } from '@/types'
 import { useOfertas } from '@/hooks/useOfertas'
 import PublishOfferForm from './PublishOfferForm'
 import OfferTable from './OfferTable'
+import TableInfo from './TableInfo'
 import VoucherModal, { DatosVoucher } from './VoucherModal'
 import { useEffect, useState } from 'react'
 import supabase from '@/lib/supabase'
@@ -147,10 +148,7 @@ export default function OfertasSection({ producto }: Props) {
             onEjecutarDirecto={handleCompraDirecta}
           />
 
-          <div className="table-info">
-            <i className="bi bi-info-circle-fill"></i>
-            Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de venta.
-          </div>
+          <TableInfo mensaje="Ingresa la cantidad para calcular el total automáticamente y poder comprar." />
         </div>
       </section>
 

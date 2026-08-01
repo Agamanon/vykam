@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import supabase from '@/lib/supabase'
 import type { User } from '@supabase/supabase-js'
+import TableInfo from './TableInfo'
 
 interface Props {
   tipo: 'venta' | 'compra'
@@ -99,10 +100,7 @@ export default function PublishOfferForm({ tipo, onPublicar }: Props) {
         <span>{esVenta ? 'Publica tu oferta de venta' : 'Publica tu oferta de compra'}</span>
       </div>
       {esVenta && (
-        <div className="table-info">
-          <i className="bi bi-info-circle-fill"></i>
-          Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de venta.
-        </div>
+        <TableInfo mensaje="Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de venta." />
       )}
       <form className="new-offer-grid" onSubmit={handleSubmit}>
         <div className="new-offer-field">
