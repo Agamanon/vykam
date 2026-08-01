@@ -153,7 +153,9 @@ export default function OfertasSection({ producto }: Props) {
             onEjecutarDirecto={handleCompraDirecta}
           />
 
-          <TableInfo mensaje="Ingresa la cantidad para calcular el total automáticamente y poder comprar." />
+          {usuario && (
+            <TableInfo mensaje="Ingresa la cantidad para calcular el total automáticamente y poder comprar." />
+          )}
         </div>
       </section>
 
@@ -184,10 +186,9 @@ export default function OfertasSection({ producto }: Props) {
             onEjecutarDirecto={handleVentaDirecta}
           />
 
-          <div className="table-info">
-            <i className="bi bi-info-circle-fill"></i>
-            Ingresa la cantidad y el precio que estás dispuesto a pagar por unidad.
-          </div>
+          {usuario && (
+            <TableInfo mensaje="Ingresa la cantidad y el precio que estás dispuesto a pagar por unidad." />
+          )}
         </div>
       </section>
     </>

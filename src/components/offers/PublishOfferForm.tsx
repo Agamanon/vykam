@@ -99,8 +99,10 @@ export default function PublishOfferForm({ tipo, onPublicar }: Props) {
         <i className="bi bi-plus-circle-fill"></i>
         <span>{esVenta ? 'Publica tu oferta de venta' : 'Publica tu oferta de compra'}</span>
       </div>
-      {esVenta && (
+      {esVenta ? (
         <TableInfo mensaje="Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de venta." />
+      ) : (
+        <TableInfo mensaje="Ingresa la cantidad y el precio por unidad para calcular el total automáticamente y crear una oferta de compra." />
       )}
       <form className="new-offer-grid" onSubmit={handleSubmit}>
         <div className="new-offer-field">
