@@ -187,7 +187,7 @@ export default function OfertasSection({ producto }: Props) {
           />
 
           {usuario && (
-            <TableInfo mensaje="Ingresa la cantidad y el precio que estás dispuesto a pagar por unidad." />
+            <TableInfo mensaje="Ingresa la cantidad para calcular el total automáticamente y poder vender." />
           )}
         </div>
       </section>
