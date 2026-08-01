@@ -454,7 +454,7 @@ export default function DashboardPage({ searchParams }: Props) {
       {/* ── SIDEBAR ── */}
       <aside className={`dash-sidebar ${menuAbierto ? 'open' : ''}`}>
         <div className="dash-sidebar-header">
-          <div className="dash-brand">
+          <Link href="/" className="dash-brand">
             <Image src="/images/vykam-icon.svg" alt="Vykam" width={40} height={40} className="dash-brand-icon" />
             <span className="dash-brand-col">
               <span className="dash-brand-wordmark">
@@ -463,7 +463,7 @@ export default function DashboardPage({ searchParams }: Props) {
               </span>
               <span className="dash-brand-tagline">COMPRAR · VENDER</span>
             </span>
-          </div>
+          </Link>
         </div>
 
         <nav className="dash-nav">
