@@ -37,22 +37,6 @@ export default function Footer() {
         </div>
         <p>Tu plataforma de confianza para comprar y vender</p>
 
-        {/* Redes sociales */}
-        <div className="social-links">
-          <a href="#" aria-label="Facebook">
-            <i className="bi bi-facebook"></i>
-          </a>
-          <a href="#" aria-label="Instagram">
-            <i className="bi bi-instagram"></i>
-          </a>
-          <a href="#" aria-label="Twitter/X">
-            <i className="bi bi-twitter-x"></i>
-          </a>
-          <a href="#" aria-label="WhatsApp">
-            <i className="bi bi-whatsapp"></i>
-          </a>
-        </div>
-
         <p>&copy; 2026 Vykam. Todos los derechos reservados.</p>
       </div>
     </footer>
